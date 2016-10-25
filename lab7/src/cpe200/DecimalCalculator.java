@@ -1,16 +1,24 @@
 package cpe200;
 
-public class BinaryCalculator {
-    public IOperand firstOperand;
-    public IOperand secondOperand;
+import java.math.BigDecimal;
 
-    public BinaryCalculator() {
+public class DecimalCalculator {
+    private IOperand firstOperand;
+    private IOperand secondOperand;
+    private BigDecimal FOP;
+    private BigDecimal SOP;
+
+    public DecimalCalculator() {
     }
 
     public void setFirstOperand(IOperand operand) {
+        firstOperand = operand;
+        FOP = new BigDecimal(firstOperand.getOperand());
     }
 
     public void setSecondOperand(IOperand operand) {
+        secondOperand = operand;
+        SOP = new BigDecimal(secondOperand.getOperand());
     }
 
     public String add() throws RuntimeException {

@@ -5,7 +5,10 @@ package cpe200;
  */
 public class IntegerOperand implements IOperand {
 
+    private String operand;
+
     public IntegerOperand(int i) {
+        operand = Integer.toString(i);
 
     }
 
