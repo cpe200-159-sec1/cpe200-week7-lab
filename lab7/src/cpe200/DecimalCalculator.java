@@ -59,6 +59,6 @@ public class DecimalCalculator {
         }
         return FOP.pow(SOP.intValue()).stripTrailingZeros().toString();
     }
-    }
+
 
 }

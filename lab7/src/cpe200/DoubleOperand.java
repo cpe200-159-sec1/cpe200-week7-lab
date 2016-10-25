@@ -14,6 +14,6 @@ public class DoubleOperand implements IOperand{
 
     @Override
     public String getOperand() {
-        return null;
+        return operand;
     }
 }
