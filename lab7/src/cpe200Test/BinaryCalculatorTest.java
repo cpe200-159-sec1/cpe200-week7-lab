@@ -13,11 +13,11 @@ import static org.junit.Assert.*;
 public class BinaryCalculatorTest {
     IOperand firstOperand;
     IOperand secondOperand;
-    BinaryCalculator binaryCalculator;
+    DecimalCalculator binaryCalculator;
 
     @Before
     public void setUp() throws Exception {
-        binaryCalculator = new BinaryCalculator();
+        binaryCalculator = new DecimalCalculator();
     }
 
     @Test
@@ -583,10 +583,10 @@ public class BinaryCalculatorTest {
         Field field = StringOperand.class.getDeclaredField("operand");
         assertFalse(Modifier.isPublic(field.getModifiers()));
 
-        field = BinaryCalculator.class.getDeclaredField("firstOperand");
+        field = DecimalCalculator.class.getDeclaredField("firstOperand");
         assertFalse(Modifier.isPublic(field.getModifiers()));
 
-        field = BinaryCalculator.class.getDeclaredField("secondOperand");
+        field = DecimalCalculator.class.getDeclaredField("secondOperand");
         assertFalse(Modifier.isPublic(field.getModifiers()));
     }
 

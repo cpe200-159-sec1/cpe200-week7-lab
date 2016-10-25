@@ -4,13 +4,13 @@ package cpe200;
  * Created by pruet on 26/9/2559.
  */
 public class IntegerOperand implements IOperand {
-
-    public IntegerOperand(int i) {
-
+    String iOperand;
+    public IntegerOperand(Integer i) {
+        this.iOperand = i.toString();
     }
 
     @Override
     public String getOperand() {
-        return null;
+        return iOperand;
     }
 }
