@@ -13,12 +13,12 @@ public class DecimalCalculator {
 
     public void setFirstOperand(IOperand operand) {
         firstOperand = operand;
-        first = new BigDecimal(operand.getOperand());
+        first = new BigDecimal(firstOperand.getOperand());
     }
 
     public void setSecondOperand(IOperand operand) {
         secondOperand = operand;
-        second = new BigDecimal(operand.getOperand());
+        second = new BigDecimal(secondOperand.getOperand());
     }
 
     public String add() throws RuntimeException {
