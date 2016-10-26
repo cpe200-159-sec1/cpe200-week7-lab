@@ -2,24 +2,7 @@ package cpe200;
 
 import java.math.BigDecimal;
 
-public class DecimalCalculator {
-    private IOperand firstOperand;
-    private IOperand secondOperand;
-    private BigDecimal first;
-    private BigDecimal second;
-
-    public DecimalCalculator() {
-    }
-
-    public void setFirstOperand(IOperand operand) {
-        firstOperand = operand;
-        first = new BigDecimal(firstOperand.getOperand());
-    }
-
-    public void setSecondOperand(IOperand operand) {
-        secondOperand = operand;
-        second = new BigDecimal(secondOperand.getOperand());
-    }
+public class DecimalCalculator extends BaseCalculator{
 
     public String add() throws RuntimeException {
         if(first.intValue()<0||second.intValue()<0)
@@ -85,5 +68,4 @@ public class DecimalCalculator {
             return sent.stripTrailingZeros().toString();
         }
     }
-
 }

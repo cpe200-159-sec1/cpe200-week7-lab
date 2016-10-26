@@ -7,24 +7,7 @@ import static java.lang.Math.pow;
 /**
  * Created by Chetsada Chaiprasop on 10/25/2016.
  */
-public class BinaryCalculator {
-    public  IOperand firstOperand;
-    public IOperand secondOperand;
-    public  BigDecimal first;//have for check number
-    public BigDecimal second;//have for check number
-
-    public BinaryCalculator() {
-    }
-
-    public void setFirstOperand(IOperand operand) {
-        firstOperand = operand;
-        first = new BigDecimal(firstOperand.getOperand());
-    }
-
-    public void setSecondOperand(IOperand operand) {
-        secondOperand = operand;
-        second = new BigDecimal(secondOperand.getOperand());
-    }
+public class BinaryCalculator extends BaseCalculator{
 
     public String add() throws RuntimeException {
         if(first.intValue()<0||second.intValue()<0)
@@ -46,11 +29,11 @@ public class BinaryCalculator {
         else
         {
             String result = subBinary(firstOperand.getBinary(),secondOperand.getBinary());
-            if(first.intValue()==second.intValue())
+            if(first.doubleValue()==second.doubleValue())
             {
                 return convertToDecimal(result);
             }
-            return (first.intValue()>second.intValue()? convertToDecimal(result):'-'+convertToDecimal(result));
+            return (first.doubleValue()>second.doubleValue()? convertToDecimal(result):'-'+convertToDecimal(result));
         }
     }
 
@@ -78,7 +61,7 @@ public class BinaryCalculator {
         }
         else
         {
-            if(first.intValue()%second.intValue()==0) {
+            if(first.doubleValue()%second.doubleValue()==0) {
                 String result = divideBinary(firstOperand.getBinary(), secondOperand.getBinary());
                 return convertToDecimal(result);
             }
@@ -107,19 +90,38 @@ public class BinaryCalculator {
 
     private String convertToDecimal(String input)
     {
-        int count = 0;
-        int result= 0;
-        for (int i=input.length()-1;i>=0;i--) {
-            if (input.charAt(i) == '1') {
-                result += pow(2,count);
-                count++;
+        String part1 = Integer.toString(new BigDecimal(input).intValue());
+        int countPlus = 0;
+        int intResult= 0;
+        for (int i=part1.length()-1;i>=0;i--) {
+            if (part1.charAt(i) == '1') {
+                intResult += pow(2,countPlus);
+                countPlus++;
             }
             else
             {
-                count++;
+                countPlus++;
             }
         }
-        return Integer.toString(result);
+        if(input.indexOf('.')==-1) {
+            return Integer.toString(intResult);
+        }
+        else  {
+            String part2 = input.substring(input.indexOf('.')+1);
+            int countDecrease = -1;
+            Double doubleResult = 0.0;
+            for (int i=0;i<part2.length();i++) {
+                if (part2.charAt(i) == '1') {
+                    doubleResult += pow(2,countDecrease);
+                    countDecrease--;
+                }
+                else
+                {
+                    countDecrease--;
+                }
+            }
+            return Double.toString(intResult+doubleResult);
+        }
     }
 
     private String addBinary(String num1,String num2)
@@ -132,6 +134,11 @@ public class BinaryCalculator {
         String carryIn = "0";
         for(int i=temp.length()-1;i>=0;i--)
         {
+            if(temp.charAt(i)=='.')
+            {
+                result = '.'+result;
+                continue;
+            }
             BigDecimal intcarryIn = new BigDecimal(carryIn);
             BigDecimal intchar = new BigDecimal(temp.charAt(i)+"");
             int inttemp = intcarryIn.intValue()+intchar.intValue();
