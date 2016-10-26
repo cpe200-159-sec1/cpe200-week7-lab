@@ -22,9 +22,6 @@ public class BinaryCalculator {
     }
 
     public void setFirstOperand(IOperand operand) {
-        BigDecimal ee = new BigDecimal("4.0");
-        System.out.println(ee.stripTrailingZeros());
-
         System.out.println("x was to Setting is : "+operand.getOperand());
         x = getFloat(operand.getOperand());
         //System.out.println(getFloat("3"));
@@ -42,6 +39,7 @@ public class BinaryCalculator {
 
     public String add() throws RuntimeException {
         //Full Adder
+        System.out.println("---------ADD MODULE-------");
         chkBalance();
         String sum = new String();
         String carry = new String("0");
@@ -59,33 +57,20 @@ public class BinaryCalculator {
         }
         this.carry = carry;
         String ress = reFormmating(rePointting(carry+sum)).stripTrailingZeros().toString();
+        System.out.println("\taddition result : "+ress);
         return ress;
     }
 
     public String subtract() throws RuntimeException {
         //one_complement
-        if(Integer.parseInt(firstOperand.getOperand()) >= 0){
+        if(reFormmating(firstOperand.getOperand()).floatValue() >= 0){
+            System.out.println("---------Subst MODULE-------");
             chkBalance();
-            String complement_y = one_complement(y);
-            IOperand f1 = new StringOperand(x);
-            IOperand f2 = new StringOperand(complement_y);
-            BinaryCalculator numerator = new BinaryCalculator();
-            numerator.setFirstOperand(f1);
-            numerator.setSecondOperand(f2);
-            String res = numerator.add();
-            if (numerator.getCarry().equals(1)){
-                f1 = new StringOperand(res);
-                f2 = new StringOperand("1");
-                numerator = new BinaryCalculator();
-                numerator.setFirstOperand(f1);
-                numerator.setSecondOperand(f2);
-                return numerator.add();
-            }else {
-                return one_complement(res);
-            }
+            
         }else {
             throw new RuntimeException();
         }
+
     }
 
     public String multiply() throws RuntimeException {
@@ -133,9 +118,13 @@ public class BinaryCalculator {
             return re;
         }else {
             String re = Integer.toBinaryString(Integer.parseInt(x));
-            System.out.println("No hasnt point : "+re);
+            System.out.println("\tNo hasnt point : "+re);
             return re;
         }
+    }
+
+    private String binaryToIntergerString(String binary){
+        return rePointting(binary);
     }
 
     private String floatToBinaryString( double n ) {
@@ -162,14 +151,17 @@ public class BinaryCalculator {
             String n = Integer.toString(Integer.parseInt(sNum,2));
             String p = Integer.toString(Integer.parseInt(sPoint,2));
             //Result of p.n is Double
-            System.out.println(n+"."+p);
+            System.out.println("\t\tRepoint : "+n+"."+p);
             return n+"."+p;
         }else {
-            return numbr;
+            String n = Integer.toString(Integer.parseInt(numbr,2));
+            System.out.println("\t\tNot repoint : "+n);
+            return n;
         }
     }
 
     private BigDecimal reFormmating(String result){
+        System.out.println("\t\tReformmat input : "+result);
         BigDecimal res = new BigDecimal(result);
         return res;
     }
