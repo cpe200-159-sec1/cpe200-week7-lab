@@ -11,6 +11,8 @@ public class BinaryCalculator {
     private String y;
     private String carry;
 
+    private int pointLength = 0;
+
     public BinaryCalculator() {
         x = "0";
         y = "0";
@@ -18,7 +20,18 @@ public class BinaryCalculator {
 
     public void setFirstOperand(IOperand operand) {
         System.out.println("x was to Setting");
-        x = Integer.toBinaryString(Integer.parseInt(operand.getOperand()));
+        /*try{
+            System.out.println("Int was to Setting");
+            x = Integer.toBinaryString(Integer.parseInt(operand.getOperand()));
+        }catch (NumberFormatException e){
+            System.out.println("Dounble was to Setting");
+            x = toBinary(Double.parseDouble(operand.getOperand()), 10);
+        }*/
+        System.out.println(getFloat("3"));
+
+        getFloat(operand.toString());
+        System.out.println("rrrr:  "+x);
+
         firstOperand = operand;
     }
 
@@ -100,6 +113,43 @@ public class BinaryCalculator {
             res += (base.charAt(i) == '0')?"1":"0";
         }
         return res;
+    }
+    private String use_adder(){
+        return "";
+    }
+
+    private String getFloat(String x){
+        //Covert String of Double to String of Binary Double without point
+        if (x.contains(".")){
+            System.out.println("Yes has point");
+            double f = Double.parseDouble("0."+x.split("[.]")[1]);
+
+            //Find float Length
+            String fText = floatToBinaryString(f);
+            pointLength = fText.length();
+            String s = x.split("[.]")[0];
+            return Integer.toBinaryString(Integer.parseInt(s))+fText;
+        }else {
+            System.out.println("No point has");
+            return Integer.toBinaryString(Integer.parseInt(x));
+        }
+    }
+
+    private String floatToBinaryString( double n ) {
+        String val = "";
+        int i = 0;
+        while ( n > 0 && i < 10) {
+            double r = n * 2;
+            if( r >= 1 ) {
+                val += "1";
+                n = r - 1;
+            }else{
+                val += "0";
+                n = r;
+            }
+            i++;
+        }
+        return val;
     }
 
     public String getCarry(){
