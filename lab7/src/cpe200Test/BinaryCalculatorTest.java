@@ -387,7 +387,7 @@ public class BinaryCalculatorTest {
     @Test
     public void addDoubleSimple() throws Exception {
         firstOperand = new DoubleOperand(3.0);
-        secondOperand = new DoubleOperand(2.0);
+        secondOperand = new DoubleOperand(1.0);
         binaryCalculator.setFirstOperand(firstOperand);
         binaryCalculator.setSecondOperand(secondOperand);
         assertEquals("4", binaryCalculator.add());

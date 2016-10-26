@@ -1,5 +1,7 @@
 package cpe200;
 
+import java.math.BigDecimal;
+
 /**
  * Created by ather on 25/10/2559.
  */
@@ -11,7 +13,8 @@ public class BinaryCalculator {
     private String y;
     private String carry;
 
-    private int pointLength = 0;
+    private int xpointLength = 0;
+    private int ypointLength = 0;
 
     public BinaryCalculator() {
         x = "0";
@@ -19,25 +22,21 @@ public class BinaryCalculator {
     }
 
     public void setFirstOperand(IOperand operand) {
-        System.out.println("x was to Setting");
-        /*try{
-            System.out.println("Int was to Setting");
-            x = Integer.toBinaryString(Integer.parseInt(operand.getOperand()));
-        }catch (NumberFormatException e){
-            System.out.println("Dounble was to Setting");
-            x = toBinary(Double.parseDouble(operand.getOperand()), 10);
-        }*/
-        System.out.println(getFloat("3"));
+        BigDecimal ee = new BigDecimal("4.0");
+        System.out.println(ee.stripTrailingZeros());
 
-        getFloat(operand.toString());
-        System.out.println("rrrr:  "+x);
+        System.out.println("x was to Setting is : "+operand.getOperand());
+        x = getFloat(operand.getOperand());
+        //System.out.println(getFloat("3"));
+        //System.out.println(rePointting("1000"));
+        System.out.println("Now x is :  "+x);
 
         firstOperand = operand;
     }
 
     public void setSecondOperand(IOperand operand) {
-        System.out.println("y was to Setting");
-        y = Integer.toBinaryString(Integer.parseInt(operand.getOperand()));
+        System.out.println("y was to Setting is : "+operand.getOperand());
+        y = getFloat(operand.getOperand());
         secondOperand = operand;
     }
 
@@ -59,7 +58,8 @@ public class BinaryCalculator {
                     );
         }
         this.carry = carry;
-        return Integer.toString(Integer.parseInt(carry+sum, 2));
+        String ress = reFormmating(rePointting(carry+sum)).stripTrailingZeros().toString();
+        return ress;
     }
 
     public String subtract() throws RuntimeException {
@@ -121,17 +121,20 @@ public class BinaryCalculator {
     private String getFloat(String x){
         //Covert String of Double to String of Binary Double without point
         if (x.contains(".")){
-            System.out.println("Yes has point");
             double f = Double.parseDouble("0."+x.split("[.]")[1]);
 
             //Find float Length
             String fText = floatToBinaryString(f);
-            pointLength = fText.length();
+            xpointLength = fText.length();
             String s = x.split("[.]")[0];
-            return Integer.toBinaryString(Integer.parseInt(s))+fText;
+
+            String re = Integer.toBinaryString(Integer.parseInt(s))+fText;
+            System.out.println("\tYes has point : "+re);
+            return re;
         }else {
-            System.out.println("No point has");
-            return Integer.toBinaryString(Integer.parseInt(x));
+            String re = Integer.toBinaryString(Integer.parseInt(x));
+            System.out.println("No hasnt point : "+re);
+            return re;
         }
     }
 
@@ -149,7 +152,26 @@ public class BinaryCalculator {
             }
             i++;
         }
-        return val;
+        return (val.equals(""))?"0":val;
+    }
+
+    private String rePointting(String numbr){
+        if(xpointLength > 0){
+            String sNum = numbr.substring(0, numbr.length()-xpointLength);
+            String sPoint = numbr.substring(numbr.length()-xpointLength, numbr.length());
+            String n = Integer.toString(Integer.parseInt(sNum,2));
+            String p = Integer.toString(Integer.parseInt(sPoint,2));
+            //Result of p.n is Double
+            System.out.println(n+"."+p);
+            return n+"."+p;
+        }else {
+            return numbr;
+        }
+    }
+
+    private BigDecimal reFormmating(String result){
+        BigDecimal res = new BigDecimal(result);
+        return res;
     }
 
     public String getCarry(){
