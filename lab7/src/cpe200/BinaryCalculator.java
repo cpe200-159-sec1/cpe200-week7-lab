@@ -3,7 +3,7 @@ package cpe200;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class BinaryCalculator {
+public class BinaryCalculator extends BaseCalculator {
     private IOperand firstOperand;
     private IOperand secondOperand;
 

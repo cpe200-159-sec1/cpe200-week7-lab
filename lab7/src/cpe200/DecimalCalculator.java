@@ -1,23 +1,7 @@
 package cpe200;
 
 import java.math.*;
-public class DecimalCalculator {
-    private IOperand firstOperand;
-    private IOperand secondOperand;
-
-    public DecimalCalculator() {
-    }
-
-    public void setFirstOperand(IOperand operand)
-    {
-        firstOperand = operand;
-    }
-
-
-    public void setSecondOperand(IOperand operand)
-    {
-        secondOperand = operand;
-    }
+public class DecimalCalculator extends BaseCalculator{
 
     public String add()
     {
