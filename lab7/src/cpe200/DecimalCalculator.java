@@ -7,23 +7,7 @@ import java.math.RoundingMode;
  * Created by pruet on 5/9/2559.
  */
 
-public class DecimalCalculator {
-    private BigDecimal firstOperand;
-    private BigDecimal secondOperand;
-
-    public DecimalCalculator() {
-        firstOperand = BigDecimal.ZERO;
-        secondOperand = BigDecimal.ZERO;
-    }
-
-    public void setFirstOperand(IOperand operand) {
-        firstOperand = new BigDecimal(operand.getOperand());
-    }
-
-
-    public void setSecondOperand(IOperand operand) {
-        secondOperand = new BigDecimal(operand.getOperand());
-    }
+public class DecimalCalculator extends BaseCalculator {
 
     public String add() {
         CheckNegativeOperand();

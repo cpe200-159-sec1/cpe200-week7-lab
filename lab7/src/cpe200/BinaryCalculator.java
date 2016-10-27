@@ -8,7 +8,7 @@ import java.nio.ByteBuffer;
  * Created by pruet on 5/9/2559.
  */
 
-public class BinaryCalculator {
+public class BinaryCalculator extends BaseCalculator {
     private BigDecimal firstOperand;
     private BigDecimal secondOperand;
 
@@ -17,6 +17,7 @@ public class BinaryCalculator {
         secondOperand = BigDecimal.ZERO;
     }
 
+    @Override
     public void setFirstOperand(IOperand operand) {
         if (operand.getOperand().matches("[01]+")) {
             firstOperand = new BigDecimal(operand.getOperand());
@@ -25,7 +26,7 @@ public class BinaryCalculator {
         }
     }
 
-
+    @Override
     public void setSecondOperand(IOperand operand) {
         if (operand.getOperand().matches("[01]+")) {
             secondOperand = new BigDecimal(operand.getOperand());
