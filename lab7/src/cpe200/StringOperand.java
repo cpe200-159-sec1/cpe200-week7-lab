@@ -11,4 +11,5 @@ public class StringOperand implements IOperand {
     public String getOperand() {
         return operand;
     }
+
 }
