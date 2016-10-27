@@ -9,25 +9,28 @@ import java.math.RoundingMode;
 
 public class DecimalCalculator extends BaseCalculator {
 
+    @Override
     public String add() {
         CheckNegativeOperand();
         return firstOperand.add(secondOperand)
                 .stripTrailingZeros().toString();
     }
 
+    @Override
     public String subtract() {
         CheckNegativeOperand();
         return firstOperand.subtract(secondOperand)
                 .stripTrailingZeros().toString();
     }
 
+    @Override
     public String multiply() {
         CheckNegativeOperand();
         return firstOperand.multiply(secondOperand)
                 .stripTrailingZeros().toString();
     }
 
-    /* This method should throw an exception when divide by zero */
+    @Override
     public String division() {
         if (secondOperand.equals(BigDecimal.ZERO))
             throw new ArithmeticException();
@@ -36,7 +39,7 @@ public class DecimalCalculator extends BaseCalculator {
                 .stripTrailingZeros().toString();
     }
 
-
+    @Override
     public String power() {
         CheckNegativeOperand();
         return BigDecimal.valueOf(

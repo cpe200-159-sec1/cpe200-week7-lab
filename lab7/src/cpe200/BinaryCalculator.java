@@ -9,13 +9,6 @@ import java.nio.ByteBuffer;
  */
 
 public class BinaryCalculator extends BaseCalculator {
-    private BigDecimal firstOperand;
-    private BigDecimal secondOperand;
-
-    public BinaryCalculator() {
-        firstOperand = BigDecimal.ZERO;
-        secondOperand = BigDecimal.ZERO;
-    }
 
     @Override
     public void setFirstOperand(IOperand operand) {
@@ -35,25 +28,28 @@ public class BinaryCalculator extends BaseCalculator {
         }
     }
 
+    @Override
     public String add() {
         CheckNegativeOperand();
         return firstOperand.add(secondOperand)
                 .stripTrailingZeros().toString();
     }
 
+    @Override
     public String subtract() {
         CheckNegativeOperand();
         return firstOperand.subtract(secondOperand)
                 .stripTrailingZeros().toString();
     }
 
+    @Override
     public String multiply() {
         CheckNegativeOperand();
         return firstOperand.multiply(secondOperand)
                 .stripTrailingZeros().toString();
     }
 
-    /* This method should throw an exception when divide by zero */
+    @Override
     public String division() {
         if (secondOperand.equals(BigDecimal.ZERO))
             throw new ArithmeticException();
@@ -62,7 +58,7 @@ public class BinaryCalculator extends BaseCalculator {
                 .stripTrailingZeros().toString();
     }
 
-
+    @Override
     public String power() {
         CheckNegativeOperand();
         return BigDecimal.valueOf(
@@ -72,6 +68,7 @@ public class BinaryCalculator extends BaseCalculator {
                 )
         ).stripTrailingZeros().toString();
     }
+
 
     private void CheckNegativeOperand() {
         if (firstOperand.compareTo(BigDecimal.ZERO) < 0 || secondOperand.compareTo(BigDecimal.ZERO) < 0) {
