@@ -7,11 +7,11 @@ import java.math.RoundingMode;
  * Created by pruet on 5/9/2559.
  */
 
-public class BinaryCalculator {
+public class DecimalCalculator {
     private BigDecimal firstOperand;
     private BigDecimal secondOperand;
 
-    public BinaryCalculator() {
+    public DecimalCalculator() {
         firstOperand = BigDecimal.ZERO;
         secondOperand = BigDecimal.ZERO;
     }
