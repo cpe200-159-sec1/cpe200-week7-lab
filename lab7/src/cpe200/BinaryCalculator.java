@@ -1,17 +1,13 @@
 package cpe200;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.function.BiFunction;
 
 /**
  * Created by Aunpyz on 10/25/2016.
  */
-public class BinaryCalculator {
+public class BinaryCalculator extends BaseCalculator{
     private IOperand st;
     private IOperand nd;
-    private BigDecimal firstOperand;
-    private BigDecimal secondOperand;
 
     public BinaryCalculator()
     {
@@ -68,12 +64,6 @@ public class BinaryCalculator {
         return A.pow(b).doubleValue();
     }
 
-    private boolean isNegative()
-    {
-        //return firstOperand.getOperand().matches("^-.+$")||secondOperand.getOperand().matches("^-.+$");
-        return firstOperand.doubleValue()<0||secondOperand.doubleValue()<0;
-    }
-
     private String toBinary(IOperand operand)
     {
         String sBinary= "";
@@ -112,36 +102,5 @@ public class BinaryCalculator {
             }
         }
         return sBinary;
-    }
-
-    public String add() throws RuntimeException {
-        if(isNegative())
-            throw new RuntimeException();
-        return firstOperand.add(secondOperand).stripTrailingZeros().toString();
-    }
-
-    public String subtract() throws RuntimeException {
-        if(isNegative())
-            throw new RuntimeException();
-        return firstOperand.subtract(secondOperand).stripTrailingZeros().toString();
-    }
-
-    public String multiply() throws RuntimeException {
-        if(isNegative())
-            throw new RuntimeException();
-        return firstOperand.multiply(secondOperand).stripTrailingZeros().toString();
-    }
-
-    /* This method should throw an exception when divide by zero */
-    public String division() throws RuntimeException {
-        if(isNegative()|| secondOperand.doubleValue() == 0)
-            throw new ArithmeticException();
-        return firstOperand.divide(secondOperand, 5, BigDecimal.ROUND_HALF_UP).stripTrailingZeros().toString();
-    }
-
-    public String power() throws RuntimeException {
-        if(isNegative())
-            throw new RuntimeException();
-        return firstOperand.pow(secondOperand.intValue()).stripTrailingZeros().toString();
     }
 }
