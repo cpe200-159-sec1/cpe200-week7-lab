@@ -3,11 +3,11 @@ package cpe200;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class BinaryCalculator {
+public class DecimalCalculator {
     private IOperand firstOperand;
     private IOperand secondOperand;
 
-    public BinaryCalculator() {
+    public DecimalCalculator() {
     }
 
     public void setFirstOperand(IOperand operand) {
