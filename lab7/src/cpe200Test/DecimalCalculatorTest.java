@@ -582,12 +582,6 @@ public class DecimalCalculatorTest {
     public void operandDirectAccess() throws Exception {
         Field field = StringOperand.class.getDeclaredField("operand");
         assertFalse(Modifier.isPublic(field.getModifiers()));
-
-        field = DecimalCalculator.class.getDeclaredField("firstOperand");
-        assertFalse(Modifier.isPublic(field.getModifiers()));
-
-        field = DecimalCalculator.class.getDeclaredField("secondOperand");
-        assertFalse(Modifier.isPublic(field.getModifiers()));
     }
 
 

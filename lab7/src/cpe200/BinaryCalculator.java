@@ -8,51 +8,35 @@ import java.nio.ByteBuffer;
  * Created by pruet on 5/9/2559.
  */
 
-public class BinaryCalculator {
-    private BigDecimal firstOperand;
-    private BigDecimal secondOperand;
+public abstract class BinaryCalculator extends BaseCalculator {
 
-    public BinaryCalculator() {
-        firstOperand = BigDecimal.ZERO;
-        secondOperand = BigDecimal.ZERO;
-    }
-
+    @Override
     public void setFirstOperand(IOperand operand) {
         if (operand.getOperand().matches("[01]+")) {
-            firstOperand = new BigDecimal(operand.getOperand());
+            super.firstOperand = new BigDecimal(operand.getOperand());
         } else {
             throw new ArithmeticException("operand is not Binary");
         }
     }
 
-
+    @Override
     public void setSecondOperand(IOperand operand) {
         if (operand.getOperand().matches("[01]+")) {
-            secondOperand = new BigDecimal(operand.getOperand());
+            super.secondOperand = new BigDecimal(operand.getOperand());
         } else {
             throw new ArithmeticException("operand is not Binary");
         }
     }
 
-    public String add() {
-        CheckNegativeOperand();
-        return firstOperand.add(secondOperand)
-                .stripTrailingZeros().toString();
-    }
 
-    public String subtract() {
-        CheckNegativeOperand();
-        return firstOperand.subtract(secondOperand)
-                .stripTrailingZeros().toString();
-    }
-
+    @Override
     public String multiply() {
         CheckNegativeOperand();
         return firstOperand.multiply(secondOperand)
                 .stripTrailingZeros().toString();
     }
 
-    /* This method should throw an exception when divide by zero */
+    @Override
     public String division() {
         if (secondOperand.equals(BigDecimal.ZERO))
             throw new ArithmeticException();
@@ -61,7 +45,7 @@ public class BinaryCalculator {
                 .stripTrailingZeros().toString();
     }
 
-
+    @Override
     public String power() {
         CheckNegativeOperand();
         return BigDecimal.valueOf(
@@ -71,6 +55,7 @@ public class BinaryCalculator {
                 )
         ).stripTrailingZeros().toString();
     }
+
 
     private void CheckNegativeOperand() {
         if (firstOperand.compareTo(BigDecimal.ZERO) < 0 || secondOperand.compareTo(BigDecimal.ZERO) < 0) {
