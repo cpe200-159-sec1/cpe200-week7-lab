@@ -4,7 +4,7 @@ package cpe200;
  * Created by kawewut on 10/27/2016 AD.
  */
 public class BinaryCalculator extends BaseCalculator{
-    //LAB2 
+    //LAB2
     private IOperand firstOperand;
     private IOperand secondOperand;
 
