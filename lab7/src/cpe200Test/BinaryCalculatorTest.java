@@ -22,18 +22,18 @@ public class BinaryCalculatorTest {
 
     @Test
     public void addStringSimple() throws Exception {
-        firstOperand = new StringOperand("1");
-        secondOperand = new StringOperand("1");
+        firstOperand = new StringOperand(Long.toBinaryString(1));
+        secondOperand = new StringOperand(Long.toBinaryString(1));
         binaryCalculator.setFirstOperand(firstOperand);
         binaryCalculator.setSecondOperand(secondOperand);
-        assertEquals("2", binaryCalculator.add());
+        assertEquals(Long.toBinaryString(2), binaryCalculator.add());
     }
 
     @Test
     public void addStringSimpleException() throws Exception {
         try {
-            firstOperand = new StringOperand("-1");
-            secondOperand = new StringOperand("1");
+            firstOperand = new StringOperand(Long.toBinaryString(-1));
+            secondOperand = new StringOperand(Long.toBinaryString(1));
             binaryCalculator.setFirstOperand(firstOperand);
             binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
