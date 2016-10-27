@@ -18,7 +18,6 @@ public class BinaryCalculator extends BaseCalculator{
     public void setFirstOperand(IOperand operand)
     {
         st = new StringOperand(toBinary(operand));
-        String a = st.getOperand();
         firstOperand = toBigDecimal(st.getOperand());
     }
 
