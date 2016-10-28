@@ -15,6 +15,15 @@ public class BaseCalculator {
         return firstOperand.doubleValue()<0|| secondOperand.doubleValue()<0;
     }
 
+    public void setFirstOperand(IOperand operand)
+    {
+
+    }
+
+    public void setSecondOperand(IOperand operand)
+    {
+
+    }
     public String add() throws RuntimeException
     {
         if(isNegative())

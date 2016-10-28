@@ -15,15 +15,21 @@ public class BinaryCalculator extends BaseCalculator{
         nd = new IntegerOperand(0);
     }
 
-    public void setFirstOperand(IOperand operand)
+    @Override
+    public void setFirstOperand(IOperand operand) throws RuntimeException
     {
-        st = new StringOperand(toBinary(operand));
+        if(!operand.getOperand().matches("^[01]+$"))
+            throw new ArithmeticException();
+        st = new StringOperand(operand.getOperand());
         firstOperand = toBigDecimal(st.getOperand());
     }
 
-    public void setSecondOperand(IOperand operand)
+    @Override
+    public void setSecondOperand(IOperand operand) throws RuntimeException
     {
-        nd = new StringOperand(toBinary(operand));
+        if(!operand.getOperand().matches("^[01]+$"))
+            throw new ArithmeticException();
+        nd = new StringOperand(operand.getOperand());
         secondOperand = toBigDecimal(nd.getOperand());
     }
 
@@ -63,10 +69,10 @@ public class BinaryCalculator extends BaseCalculator{
         return A.pow(b).doubleValue();
     }
 
-    private String toBinary(IOperand operand)
+    private String toBinary(String operand)
     {
         String sBinary= "";
-        String[] split = operand.getOperand().split("\\.");
+        String[] split = operand.split("\\.");
         //check if negative number
         //toBinaryString method cannot convert negative number properly
         Integer iDecimal;
@@ -101,5 +107,45 @@ public class BinaryCalculator extends BaseCalculator{
             }
         }
         return sBinary;
+    }
+
+    @Override
+    public String add() throws RuntimeException
+    {
+        if(isNegative())
+            throw new RuntimeException();
+        String add = firstOperand.add(secondOperand).stripTrailingZeros().toString();
+        return toBinary(add);
+    }
+
+    @Override
+    public String subtract() throws RuntimeException
+    {
+        if(isNegative())
+            throw new RuntimeException();
+        String subtract = firstOperand.subtract(secondOperand).stripTrailingZeros().toString();
+        return toBinary(subtract);
+    }
+
+    public String multiply() throws RuntimeException
+    {
+        if(isNegative())
+            throw new RuntimeException();
+        String multiply = firstOperand.multiply(secondOperand).stripTrailingZeros().toString();
+        return toBinary(multiply);
+    }
+
+    public String division() throws RuntimeException {
+        if(isNegative()|| secondOperand.doubleValue() == 0)
+            throw new ArithmeticException();
+        String division = firstOperand.divide(secondOperand, 5, BigDecimal.ROUND_HALF_UP).stripTrailingZeros().toString();
+        return toBinary(division);
+    }
+
+    public String power() throws RuntimeException {
+        if(isNegative())
+            throw new RuntimeException();
+        String pow = firstOperand.pow(secondOperand.intValue()).stripTrailingZeros().toString();
+        return toBinary(pow);
     }
 }
