@@ -127,6 +127,7 @@ public class BinaryCalculator extends BaseCalculator{
         return toBinary(subtract);
     }
 
+    @Override
     public String multiply() throws RuntimeException
     {
         if(isNegative())
@@ -135,6 +136,7 @@ public class BinaryCalculator extends BaseCalculator{
         return toBinary(multiply);
     }
 
+    @Override
     public String division() throws RuntimeException {
         if(isNegative()|| secondOperand.doubleValue() == 0)
             throw new ArithmeticException();
@@ -142,6 +144,7 @@ public class BinaryCalculator extends BaseCalculator{
         return toBinary(division);
     }
 
+    @Override
     public String power() throws RuntimeException {
         if(isNegative())
             throw new RuntimeException();
