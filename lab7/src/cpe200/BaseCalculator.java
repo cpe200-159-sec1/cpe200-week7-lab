@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 public class BaseCalculator {
     protected IOperand firstOperand;
     protected IOperand secondOperand;
+    protected String answer;
 
     public void setFirstOperand(IOperand operand) {
         firstOperand = operand;
@@ -25,7 +26,8 @@ public class BaseCalculator {
             throw  new  RuntimeException("operan < 1");
         }
 
-        return d1.add(d2).stripTrailingZeros().toString();
+        this.setAnswer(d1.add(d2).stripTrailingZeros().toString());
+        return this.getAnswer();
     }
 
     public String subtract() throws RuntimeException {
@@ -35,7 +37,8 @@ public class BaseCalculator {
             throw  new  RuntimeException("operan < 1");
         }
 
-        return d1.subtract(d2).stripTrailingZeros().toString();
+        this.setAnswer(d1.subtract(d2).stripTrailingZeros().toString());
+        return this.getAnswer();
     }
 
     public String multiply() throws RuntimeException {
@@ -45,7 +48,8 @@ public class BaseCalculator {
             throw  new  RuntimeException("operan < 1");
         }
 
-        return d1.multiply(d2).stripTrailingZeros().toString();
+        this.setAnswer(d1.multiply(d2).stripTrailingZeros().toString());
+        return this.getAnswer();
     }
 
     /* This method should throw an exception when divide by zero */
@@ -59,7 +63,8 @@ public class BaseCalculator {
             throw  new  ArithmeticException("operan < 1");
         }
 
-        return d1.divide(d2,5,BigDecimal.ROUND_HALF_UP).stripTrailingZeros().toString();
+        this.setAnswer(d1.divide(d2,5,BigDecimal.ROUND_HALF_UP).stripTrailingZeros().toString());
+        return this.getAnswer();
     }
 
     public String power() throws RuntimeException {
@@ -71,6 +76,15 @@ public class BaseCalculator {
 
         d1 = d1.pow(d2.intValue());
         d1 = d1.stripTrailingZeros();
-        return d1.toString();
+        this.setAnswer(d1.toString());
+        return this.getAnswer();
+    }
+
+    public void setAnswer(String ans){
+        this.answer = ans;
+    }
+
+    public String getAnswer(){
+        return this.answer;
     }
 }
