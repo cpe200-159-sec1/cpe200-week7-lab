@@ -8,17 +8,12 @@ import java.math.BigDecimal;
 /**
  * Created by qowie on 10/25/2016.
  */
-public class BinaryCalculator {
+public class BinaryCalculator extends BaseCalculator {
 
     private IOperand firstOperand;
     private IOperand secondOperand;
 
-    public BinaryCalculator() {
-
-        firstOperand = null;
-        secondOperand = null;
-    }
-
+    @Override
     public void setFirstOperand(IOperand operand) {
         checkBinary(operand.getOperand());
         firstOperand = operand;
@@ -26,7 +21,7 @@ public class BinaryCalculator {
 
     }
 
-
+    @Override
     public void setSecondOperand(IOperand operand) {
         checkBinary(operand.getOperand());
         secondOperand = operand;
@@ -34,7 +29,7 @@ public class BinaryCalculator {
 
     }
 
-
+    @Override
     public String add() throws RuntimeException {
         BigDecimal first = BinaryStringToBigDecimal(firstOperand.getOperand());
         BigDecimal second = BinaryStringToBigDecimal(secondOperand.getOperand());
@@ -44,7 +39,7 @@ public class BinaryCalculator {
 
 
     }
-
+    @Override
     public String subtract() throws RuntimeException {
         BigDecimal first = BinaryStringToBigDecimal(firstOperand.getOperand());
         BigDecimal second = BinaryStringToBigDecimal(secondOperand.getOperand());
@@ -52,7 +47,7 @@ public class BinaryCalculator {
         BigDecimal out = first.subtract(second);
         return Long.toBinaryString(out.stripTrailingZeros().longValue());
     }
-
+    @Override
     public String multiply() throws RuntimeException {
         BigDecimal first = BinaryStringToBigDecimal(firstOperand.getOperand());
         BigDecimal second = BinaryStringToBigDecimal(secondOperand.getOperand());
@@ -61,7 +56,7 @@ public class BinaryCalculator {
         return Long.toBinaryString(out.stripTrailingZeros().longValue());
 
     }
-
+    @Override
     /* This method should throw an exception when divide by zero */
     public String division() throws RuntimeException {
         BigDecimal first = BinaryStringToBigDecimal(firstOperand.getOperand());
@@ -75,7 +70,7 @@ public class BinaryCalculator {
         return Long.toBinaryString(out.stripTrailingZeros().longValue());
 
     }
-
+    @Override
     public String power() throws RuntimeException {
         BigDecimal first = BinaryStringToBigDecimal(firstOperand.getOperand());
         BigDecimal second = BinaryStringToBigDecimal(secondOperand.getOperand());
@@ -91,12 +86,6 @@ public class BinaryCalculator {
 
     }
 
-
-    public void checkException(BigDecimal first, BigDecimal second) {
-        if (first.intValue() < 0 || second.intValue() < 0) {
-            throw new RuntimeException();
-        }
-    }
 
     private void checkBinary(String bin) {
         for (int i = 0; i < bin.length(); i++) {
