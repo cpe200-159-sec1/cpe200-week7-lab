@@ -20,19 +20,17 @@ public class BinaryCalculator {
     }
 
     public void setFirstOperand(IOperand operand) {
+        checkBinary(operand.getOperand());
         firstOperand = operand;
-        BigDecimal first = BinaryStringToBigDecimal(firstOperand.getOperand());
-        checkException(first,new BigDecimal(0));
-
 
 
     }
 
 
     public void setSecondOperand(IOperand operand) {
+        checkBinary(operand.getOperand());
         secondOperand = operand;
-        BigDecimal second = BinaryStringToBigDecimal(secondOperand.getOperand());
-        checkException(second,new BigDecimal(0));
+
 
     }
 
@@ -43,9 +41,6 @@ public class BinaryCalculator {
 
         BigDecimal out = first.add(second);
         return Long.toBinaryString(out.stripTrailingZeros().longValue());
-
-
-
 
 
     }
@@ -71,12 +66,12 @@ public class BinaryCalculator {
     public String division() throws RuntimeException {
         BigDecimal first = BinaryStringToBigDecimal(firstOperand.getOperand());
         BigDecimal second = BinaryStringToBigDecimal(secondOperand.getOperand());
-        checkException(first,second);
-        if (second.intValue() == 0){
+        checkException(first, second);
+        if (second.intValue() == 0) {
             throw new ArithmeticException();
         }
 
-        BigDecimal out = first.divide(second,5,5);
+        BigDecimal out = first.divide(second, 5, 5);
         return Long.toBinaryString(out.stripTrailingZeros().longValue());
 
     }
@@ -90,25 +85,27 @@ public class BinaryCalculator {
     }
 
     private BigDecimal BinaryStringToBigDecimal(String bin) {
-        BigDecimal out = new BigDecimal(Long.parseLong(bin,2));
+        BigDecimal out = new BigDecimal(Long.parseLong(bin, 2));
         return out;
 
 
     }
 
-    private int findDot(String bin) {
-        for (int i = 0; i < bin.length(); i++) {
-            if (bin.charAt(i) == '.') {
-                return i;
-            }
-        }
-        return -1;
-    }
 
     public void checkException(BigDecimal first, BigDecimal second) {
         if (first.intValue() < 0 || second.intValue() < 0) {
             throw new RuntimeException();
         }
+    }
+
+    private void checkBinary(String bin) {
+        for (int i = 0; i < bin.length(); i++) {
+            if (bin.charAt(i) != '1') {
+                if (bin.charAt(i) != '0')
+                    throw new ArithmeticException();
+            }
+        }
+
     }
 }
 
