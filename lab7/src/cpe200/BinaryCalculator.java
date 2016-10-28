@@ -26,16 +26,15 @@ public class BinaryCalculator {
 
     public void setFirstOperand(IOperand operand) {
         System.out.println("x was to Setting is : "+operand.getOperand());
-        x = getFloat(operand.getOperand());
-        //System.out.println(getFloat("3"));
-        //System.out.println(rePointting("1000"));
+        x = getFloat(operand.getOperand(), 'x');
         System.out.println("Now x is :  "+x);
         firstOperand = operand;
     }
 
     public void setSecondOperand(IOperand operand) {
         System.out.println("y was to Setting is : "+operand.getOperand());
-        y = getFloat(operand.getOperand());
+        y = getFloat(operand.getOperand(), 'y');
+        System.out.println("Now x is :  "+y);
         secondOperand = operand;
     }
 
@@ -88,8 +87,8 @@ public class BinaryCalculator {
     public String multiply() throws RuntimeException {
         //Binary multiply
         //Step0 : initial
-        String numbr = new String();
-        String multi = new String();
+        String numbr;
+        String multi;
         System.out.println("---------multiply MODULE-------");
         //Step1 : Digit to loop count
         boolean isX = firstOperand.getOperand().equals(
@@ -124,6 +123,36 @@ public class BinaryCalculator {
 
     /* This method should throw an exception when divide by zero*/
     public String division() throws RuntimeException {
+        int quotient = 0;
+        int a = 300;
+        int b = 5;
+        int bfirst = b;
+        int aLength = x.length();
+        int bLength = y.length();
+        int power = aLength - bLength;
+        b =(int) (b * Math.pow(2, power));
+        System.out.println(aLength + " " + bLength + " " + power);
+
+        while(a >= bfirst) {
+            // System.out.print(a + " ");
+            //System.out.print(b + " ");
+            //System.out.println(quotient);
+            if(a >= b) {
+                aLength = Integer.toBinaryString(a).length();
+                bLength = Integer.toBinaryString(b).length();
+                int bfirstLength = Integer.toBinaryString(bfirst).length();
+                a = a-b;
+                System.out.println("rrr"+a);
+                quotient = quotient*2+1;
+                b = b/2;
+                if (a < bfirst) {
+                    quotient = quotient * (int)Math.pow(2, bLength - bfirstLength);
+                }
+            } else {
+                quotient = quotient*2;
+                b = b/2;
+            }
+        }
         return "";
     }
 
@@ -220,14 +249,19 @@ public class BinaryCalculator {
         return (b.equals("1"))?"0":"1";
     }
 
-    private String getFloat(String x){
+    private String getFloat(String x,char cX){
         //Covert String of Double to String of Binary Double without point
         if (x.contains(".")){
             double f = Double.parseDouble("0."+x.split("[.]")[1]);
 
             //Find float Length
             String fText = floatToBinaryString(f);
-            xpointLength = fText.length();
+            if(cX == 'x'){
+                xpointLength = fText.length();
+            }else {
+                ypointLength = fText.length();
+            }
+
             String s = x.split("[.]")[0];
 
             String re = Integer.toBinaryString(Integer.parseInt(s))+fText;
