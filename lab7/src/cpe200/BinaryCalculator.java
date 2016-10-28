@@ -1,8 +1,10 @@
 package cpe200;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.nio.ByteBuffer;
+
+import static java.lang.Math.pow;
+import static java.math.BigDecimal.ZERO;
+import static java.math.RoundingMode.HALF_UP;
 
 /**
  * Created by pruet on 5/9/2559.
@@ -13,65 +15,65 @@ public class BinaryCalculator extends BaseCalculator {
     @Override
     public void setFirstOperand(IOperand operand) {
         if (operand.getOperand().matches("[01]+")) {
-            firstOperand = new BigDecimal(operand.getOperand());
+            firstOperand = BigDecimal.valueOf(Integer.parseInt(operand.getOperand(), 2));
         } else {
             throw new ArithmeticException("operand is not Binary");
         }
+    }
+
+    public String stringToBinaryString(String in) {
+        return Integer.toBinaryString(Integer.parseInt(in));
     }
 
     @Override
     public void setSecondOperand(IOperand operand) {
         if (operand.getOperand().matches("[01]+")) {
-            secondOperand = new BigDecimal(operand.getOperand());
+            secondOperand = BigDecimal.valueOf(Integer.parseInt(operand.getOperand(), 2));
         } else {
             throw new ArithmeticException("operand is not Binary");
         }
     }
 
-    @Override
     public String add() {
         CheckNegativeOperand();
-        return firstOperand.add(secondOperand)
-                .stripTrailingZeros().toString();
+        return stringToBinaryString(firstOperand.add(secondOperand)
+                .stripTrailingZeros().toString());
     }
 
-    @Override
     public String subtract() {
         CheckNegativeOperand();
-        return firstOperand.subtract(secondOperand)
-                .stripTrailingZeros().toString();
+        return stringToBinaryString(firstOperand.subtract(secondOperand)
+                .stripTrailingZeros().toString());
     }
 
-    @Override
     public String multiply() {
         CheckNegativeOperand();
-        return firstOperand.multiply(secondOperand)
-                .stripTrailingZeros().toString();
+        return stringToBinaryString(firstOperand.multiply(secondOperand)
+                .stripTrailingZeros().toString());
     }
 
     @Override
     public String division() {
-        if (secondOperand.equals(BigDecimal.ZERO))
+        if (secondOperand.equals(ZERO))
             throw new ArithmeticException();
         CheckNegativeOperand();
-        return firstOperand.divide(secondOperand, 5, RoundingMode.HALF_UP)
-                .stripTrailingZeros().toString();
+        return stringToBinaryString(firstOperand.divide(secondOperand, 5, HALF_UP)
+                .stripTrailingZeros().toString());
     }
 
-    @Override
     public String power() {
         CheckNegativeOperand();
-        return BigDecimal.valueOf(
-                Math.pow(
+        return stringToBinaryString(BigDecimal.valueOf(
+                pow(
                         firstOperand.doubleValue(),
                         secondOperand.doubleValue()
                 )
-        ).stripTrailingZeros().toString();
+        ).stripTrailingZeros().toString());
     }
 
 
     private void CheckNegativeOperand() {
-        if (firstOperand.compareTo(BigDecimal.ZERO) < 0 || secondOperand.compareTo(BigDecimal.ZERO) < 0) {
+        if (firstOperand.compareTo(ZERO) < 0 || secondOperand.compareTo(ZERO) < 0) {
             throw new RuntimeException("Operand must greater than ZERO");
         }
     }
