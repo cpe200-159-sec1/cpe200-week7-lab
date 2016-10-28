@@ -90,32 +90,8 @@ public class BinaryCalculator {
     }
 
     private BigDecimal BinaryStringToBigDecimal(String bin) {
-        Long decimal = new Long(0);
-        int dot = findDot(bin);
-
-
-        if (dot == -1) {
-            int power = 0;
-            for (int i = bin.length(); i >= 0; i--) {
-                if (bin.charAt(i) == '1') decimal += (long)Math.pow(2, power);
-                power++;
-            }
-            BigDecimal out = new BigDecimal(decimal.toString());
-            return out;
-        } else {
-            int power = 0;
-            for (int i = dot - 1; i >= 0; i--) {
-                if (bin.charAt(i) == '1') decimal += (long)Math.pow(2, power);
-                power++;
-            }
-            power = -1;
-            for (int i = dot + 1; i < bin.length(); i++) {
-                if (bin.charAt(i) == '1') decimal += (long)Math.pow(2, power);
-                power--;
-            }
-            BigDecimal out = new BigDecimal(decimal.toString());
-            return out;
-        }
+        BigDecimal out = new BigDecimal(Long.parseLong(bin,2));
+        return out;
 
 
     }
