@@ -1,5 +1,7 @@
 package cpe200;
 
+import java.math.BigDecimal;
+
 public class StringOperand implements IOperand {
     private String operand;
 
