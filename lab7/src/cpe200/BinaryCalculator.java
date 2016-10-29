@@ -48,36 +48,7 @@ public class BinaryCalculator {
     public String subtract() throws RuntimeException {
         //full Subtract
         if(reFormmating(firstOperand.getOperand()).floatValue() >= 0){
-            System.out.println("---------Subst MODULE-------");
-            chkBalance();
-            String subr = new String();
-            String borr =  new String("0");
-            for (int i=this.x.length()-1;i>=0; i--){
-                subr += Integer.parseInt(borr) //Bi ^ (x ^ y)
-                        ^(
-                            Integer.parseInt(Character.toString(x.charAt(i)))
-                            ^Integer.parseInt(Character.toString(y.charAt(i)))
-                        );
-                borr = Integer.toBinaryString( //~AB+Bi~(A^B)
-                        (
-                            Integer.parseInt(not(Character.toString(x.charAt(i))))
-                            &Integer.parseInt(Character.toString(y.charAt(i)))
-                        )|(Integer.parseInt(borr)
-                                &Integer.parseInt(not(
-                                            Integer.toBinaryString(
-                                            Integer.parseInt(Character.toString(x.charAt(i)))
-                                            ^Integer.parseInt(Character.toString(y.charAt(i)))
-                                            )
-                                        )
-                                )
-                            )
-                    );System.out.println("i"+i+") "+subr+" "+borr);
-
-            }
-            String ress = reFormmating(rePointting(subr)).stripTrailingZeros().toString();
-            System.out.println("\tSubst result : "+ress);
-            return ress;
-
+            return inSubtract(this.x, this.y);
         }else {
             throw new RuntimeException();
         }
@@ -123,36 +94,7 @@ public class BinaryCalculator {
 
     /* This method should throw an exception when divide by zero*/
     public String division() throws RuntimeException {
-        int quotient = 0;
-        int a = 300;
-        int b = 5;
-        int bfirst = b;
-        int aLength = x.length();
-        int bLength = y.length();
-        int power = aLength - bLength;
-        b =(int) (b * Math.pow(2, power));
-        System.out.println(aLength + " " + bLength + " " + power);
-
-        while(a >= bfirst) {
-            // System.out.print(a + " ");
-            //System.out.print(b + " ");
-            //System.out.println(quotient);
-            if(a >= b) {
-                aLength = Integer.toBinaryString(a).length();
-                bLength = Integer.toBinaryString(b).length();
-                int bfirstLength = Integer.toBinaryString(bfirst).length();
-                a = a-b;
-                System.out.println("rrr"+a);
-                quotient = quotient*2+1;
-                b = b/2;
-                if (a < bfirst) {
-                    quotient = quotient * (int)Math.pow(2, bLength - bfirstLength);
-                }
-            } else {
-                quotient = quotient*2;
-                b = b/2;
-            }
-        }
+        inDivision(x ,y);
         return "";
     }
 
@@ -236,6 +178,136 @@ public class BinaryCalculator {
         return ress;
     }
 
+    private String inSubtract(String a, String b){
+        System.out.println("---------Subst MODULE-------");
+        chkBalance();
+        String subr = new String();
+        String borr =  new String("0");
+        for (int i=a.length()-1;i>=0; i--){
+            subr += Integer.parseInt(borr) //Bi ^ (x ^ y)
+                    ^(
+                    Integer.parseInt(Character.toString(a.charAt(i)))
+                            ^Integer.parseInt(Character.toString(b.charAt(i)))
+            );
+            borr = Integer.toBinaryString( //~AB+Bi~(A^B)
+                    (
+                            Integer.parseInt(not(Character.toString(a.charAt(i))))
+                                    &Integer.parseInt(Character.toString(b.charAt(i)))
+                    )|(Integer.parseInt(borr)
+                            &Integer.parseInt(not(
+                            Integer.toBinaryString(
+                                    Integer.parseInt(Character.toString(a.charAt(i)))
+                                            ^Integer.parseInt(Character.toString(b.charAt(i)))
+                            )
+                            )
+                    )
+                    )
+            );System.out.println("i"+i+") "+subr+" "+borr);
+
+        }
+        String ress = reFormmating(rePointting(subr)).stripTrailingZeros().toString();
+        System.out.println("\tSubst result : "+ress);
+        return ress;
+    }
+
+    private String inDivision(String a, String b){
+        System.out.println("---------Division MODULE-------");
+        int aLength = a.length();
+        int bLength = b.length();
+        int step = bLength;
+        int c=0;int i=0;
+
+        int tryDigit = 5;
+        boolean isFin = false;
+
+        StringBuilder result = new StringBuilder();
+        StringBuilder stack = new StringBuilder("");
+        String next = "";
+        String cha = "";
+        while (true){
+            System.out.println("--------- Long Division -------");
+            try {
+                cha = a.subSequence(c, i+1).toString();
+                System.out.println("Try SubSequennce");
+            }catch (IndexOutOfBoundsException e){
+                if(tryDigit > 0){
+                    a += "0";
+                }else {
+                    break;
+                }
+            }
+            System.out.println("String CHA : "+cha+" [i: "+i+" c: "+c+" ]+s "+stack.toString().length());
+
+            boolean nowIsMoreThan = isMoreThan( cha , b );
+
+
+            if(nowIsMoreThan && stack.toString().length() <= 0){
+                System.out.println("Yes char A in b");
+                result.append("1");
+                stack.append(intTobinString(inSubtract(cha, b)));
+
+            }
+
+            else if(nowIsMoreThan){
+                if(isMoreThan(stack.toString(), b)){
+                    result.append("1");
+                    String temp = intTobinString(inSubtract(stack.toString(), b));
+                    stack.delete(0, stack.length());
+                    stack.append(temp);
+                    c=i;
+                    i++;
+                }else{
+                    result.append("0");
+                    try {
+                        next = a.subSequence(i,i+1).toString();
+                        if(isMoreThan(stack.append(next).toString(), b)){
+                            String temp = intTobinString(inSubtract(stack.toString(), b));
+                            stack.delete(0, stack.length());
+                            stack.append(temp);
+                            c=i;
+                            i++;
+                        }
+                    }catch (IndexOutOfBoundsException e){
+                        if(tryDigit > 0){
+                            a += "0";
+                            i++;
+                        }else {
+                            break;
+                        }
+                    }
+                }
+
+
+
+                System.out.println("Next: "+next);
+                System.out.println("Stack: "+stack);
+
+                if(isMoreThan(cha+next, b)){
+                    System.out.println(cha+next+" Divided by "+b);
+                }
+
+                tryDigit--;
+
+                if (isFin && tryDigit <= 0){
+                    break;
+                }
+            }
+            else {
+                result.append("0");
+                i++;
+            }
+        }
+        System.out.println(reFormmating(result.toString()));
+        System.out.println(result.toString());
+        return "";
+    }
+    private boolean isMoreThan(String a, String b){
+        //a is array of Number ex 11/aaa and b is divisor ex bb/111 (in long divisor format)
+        boolean x = Double.parseDouble(a) >= Double.parseDouble(b);
+        System.out.println("\t\t"+a+" isMoreThan "+b+": "+x);
+        return x;
+    }
+
     private String maxOperand(String a, String b){
         if(reFormmating(a).doubleValue() > reFormmating(b).doubleValue()){
             return a;
@@ -274,8 +346,13 @@ public class BinaryCalculator {
         }
     }
 
-    private String binaryToIntergerString(String binary){
-        return rePointting(binary);
+    private String intTobinString(String decimal){
+        if(Integer.parseInt(decimal) >= 0){
+            return Integer.toBinaryString(Integer.parseInt(decimal));
+        }else {
+            throw new ArithmeticException("NOt negative input");
+        }
+
     }
 
     private String floatToBinaryString( double n ) {
