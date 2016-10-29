@@ -583,10 +583,10 @@ public class DecimalCalculatorTest {
         Field field = StringOperand.class.getDeclaredField("operand");
         assertFalse(Modifier.isPublic(field.getModifiers()));
 
-        field = DecimalCalculator.class.getDeclaredField("firstOperand");
+        field = BaseCalculator.class.getDeclaredField("firstOperand");
         assertFalse(Modifier.isPublic(field.getModifiers()));
 
-        field = DecimalCalculator.class.getDeclaredField("secondOperand");
+        field = BaseCalculator.class.getDeclaredField("secondOperand");
         assertFalse(Modifier.isPublic(field.getModifiers()));
     }
 
