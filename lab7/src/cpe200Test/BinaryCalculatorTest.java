@@ -10,23 +10,23 @@ import java.lang.reflect.Modifier;
 import static org.junit.Assert.*;
 
 
-public class DecimalCalculatorTest {
+public class BinaryCalculatorTest {
     IOperand firstOperand;
     IOperand secondOperand;
-    DecimalCalculator decimalCalculator;
+    DecimalCalculator binaryCalculator;
 
     @Before
     public void setUp() throws Exception {
-        decimalCalculator = new DecimalCalculator();
+        binaryCalculator = new DecimalCalculator();
     }
 
     @Test
     public void addStringSimple() throws Exception {
         firstOperand = new StringOperand("1");
         secondOperand = new StringOperand("1");
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("2", decimalCalculator.add());
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("2", binaryCalculator.add());
     }
 
     @Test
@@ -34,13 +34,13 @@ public class DecimalCalculatorTest {
         try {
             firstOperand = new StringOperand("-1");
             secondOperand = new StringOperand("1");
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
         try {
-            decimalCalculator.add();
+            binaryCalculator.add();
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -53,9 +53,9 @@ public class DecimalCalculatorTest {
     public void subtractStringSimple() throws Exception {
         firstOperand = new StringOperand("1");
         secondOperand = new StringOperand("1");
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("0", decimalCalculator.subtract());
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("0", binaryCalculator.subtract());
     }
 
     @Test
@@ -63,13 +63,13 @@ public class DecimalCalculatorTest {
         try {
             firstOperand = new StringOperand("-1");
             secondOperand = new StringOperand("1");
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
         try {
-            decimalCalculator.subtract();
+            binaryCalculator.subtract();
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -82,9 +82,9 @@ public class DecimalCalculatorTest {
     public void multiplyStringSimple() throws Exception {
         firstOperand = new StringOperand("2");
         secondOperand = new StringOperand("3");
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("6", decimalCalculator.multiply());
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("6", binaryCalculator.multiply());
     }
 
     @Test
@@ -92,13 +92,13 @@ public class DecimalCalculatorTest {
         try {
             firstOperand = new StringOperand("-1");
             secondOperand = new StringOperand("1");
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
         try {
-            decimalCalculator.multiply();
+            binaryCalculator.multiply();
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -111,9 +111,9 @@ public class DecimalCalculatorTest {
     public void divideStringSimple() throws Exception {
         firstOperand = new StringOperand("6");
         secondOperand = new StringOperand("3");
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("2", decimalCalculator.division());
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("2", binaryCalculator.division());
     }
 
     @Test
@@ -121,13 +121,13 @@ public class DecimalCalculatorTest {
         try {
             firstOperand = new StringOperand("-1");
             secondOperand = new StringOperand("1");
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
         try {
-            assertEquals("-1", decimalCalculator.division());
+            assertEquals("-1", binaryCalculator.division());
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -140,10 +140,10 @@ public class DecimalCalculatorTest {
     public void divideByZeroStringSimple() throws Exception {
         firstOperand = new StringOperand("2");
         secondOperand = new StringOperand("0");
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
         try {
-            decimalCalculator.division();
+            binaryCalculator.division();
             fail("The operation must raise an exception");
         } catch (ArithmeticException ex) {
             assertTrue(true);
@@ -155,13 +155,13 @@ public class DecimalCalculatorTest {
         try {
             firstOperand = new StringOperand("-1");
             secondOperand = new StringOperand("0");
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
         try {
-            decimalCalculator.division();
+            binaryCalculator.division();
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -174,9 +174,9 @@ public class DecimalCalculatorTest {
     public void powerStringSimple() throws Exception {
         firstOperand = new StringOperand("2");
         secondOperand = new StringOperand("3");
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("8", decimalCalculator.power());
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("8", binaryCalculator.power());
     }
 
     @Test
@@ -184,13 +184,13 @@ public class DecimalCalculatorTest {
         try {
             firstOperand = new StringOperand("-2");
             secondOperand = new StringOperand("3");
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
         try {
-            decimalCalculator.power();
+            binaryCalculator.power();
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -203,9 +203,9 @@ public class DecimalCalculatorTest {
     public void addIntSimple() throws Exception {
         firstOperand = new IntegerOperand(1);
         secondOperand = new IntegerOperand(1);
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("2", decimalCalculator.add());
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("2", binaryCalculator.add());
     }
 
     @Test
@@ -213,14 +213,14 @@ public class DecimalCalculatorTest {
         try {
             firstOperand = new IntegerOperand(-1);
             secondOperand = new IntegerOperand(1);
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
 
         try {
-            assertEquals("0", decimalCalculator.add());
+            assertEquals("0", binaryCalculator.add());
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -233,9 +233,9 @@ public class DecimalCalculatorTest {
     public void subtractIntSimple() throws Exception {
         firstOperand = new IntegerOperand(1);
         secondOperand = new IntegerOperand(1);
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("0", decimalCalculator.subtract());
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("0", binaryCalculator.subtract());
     }
 
     @Test
@@ -243,14 +243,14 @@ public class DecimalCalculatorTest {
         try {
             firstOperand = new IntegerOperand(-1);
             secondOperand = new IntegerOperand(1);
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
 
         try {
-            assertEquals("-2", decimalCalculator.subtract());
+            assertEquals("-2", binaryCalculator.subtract());
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -263,9 +263,9 @@ public class DecimalCalculatorTest {
     public void multiplyIntSimple() throws Exception {
         firstOperand = new IntegerOperand(2);
         secondOperand = new IntegerOperand(3);
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("6", decimalCalculator.multiply());
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("6", binaryCalculator.multiply());
     }
 
     @Test
@@ -273,14 +273,14 @@ public class DecimalCalculatorTest {
         try {
             firstOperand = new IntegerOperand(-1);
             secondOperand = new IntegerOperand(1);
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
 
         try {
-            assertEquals("-1", decimalCalculator.multiply());
+            assertEquals("-1", binaryCalculator.multiply());
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -293,9 +293,9 @@ public class DecimalCalculatorTest {
     public void divisionIntSimple() throws Exception {
         firstOperand = new IntegerOperand(6);
         secondOperand = new IntegerOperand(3);
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("2", decimalCalculator.division());
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("2", binaryCalculator.division());
     }
 
     @Test
@@ -303,14 +303,14 @@ public class DecimalCalculatorTest {
         try {
             firstOperand = new IntegerOperand(-1);
             secondOperand = new IntegerOperand(1);
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
 
         try {
-            assertEquals("-1", decimalCalculator.division());
+            assertEquals("-1", binaryCalculator.division());
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -323,10 +323,10 @@ public class DecimalCalculatorTest {
     public void divideByZeroIntSimple() throws Exception {
         firstOperand = new IntegerOperand(6);
         secondOperand = new IntegerOperand(0);
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
         try {
-            decimalCalculator.division();
+            binaryCalculator.division();
             fail("The operation must raise an exception");
         } catch (ArithmeticException ex) {
             assertTrue(true);
@@ -338,14 +338,14 @@ public class DecimalCalculatorTest {
         try {
             firstOperand = new IntegerOperand(-1);
             secondOperand = new IntegerOperand(0);
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
 
         try {
-            decimalCalculator.division();
+            binaryCalculator.division();
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -358,9 +358,9 @@ public class DecimalCalculatorTest {
     public void powerIntSimple() throws Exception {
         firstOperand = new IntegerOperand(2);
         secondOperand = new IntegerOperand(3);
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("8", decimalCalculator.power());
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("8", binaryCalculator.power());
     }
 
     @Test
@@ -368,14 +368,14 @@ public class DecimalCalculatorTest {
         try {
             firstOperand = new IntegerOperand(-2);
             secondOperand = new IntegerOperand(3);
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
 
         try {
-            assertEquals("-8", decimalCalculator.power());
+            assertEquals("-8", binaryCalculator.power());
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -386,26 +386,26 @@ public class DecimalCalculatorTest {
 
     @Test
     public void addDoubleSimple() throws Exception {
-        firstOperand = new oparand(3.0);
-        secondOperand = new oparand(1.0);
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("4", decimalCalculator.add());
+        firstOperand = new DoubleOperand(3.0);
+        secondOperand = new DoubleOperand(1.0);
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("4", binaryCalculator.add());
     }
 
     @Test
     public void addDoubleSimpleException() throws Exception {
         try {
-            firstOperand = new oparand(-1.0);
-            secondOperand = new oparand(1.0);
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            firstOperand = new DoubleOperand(-1.0);
+            secondOperand = new DoubleOperand(1.0);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
 
         try {
-            assertEquals("0", decimalCalculator.add());
+            assertEquals("0", binaryCalculator.add());
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -416,26 +416,26 @@ public class DecimalCalculatorTest {
 
     @Test
     public void subtractDoubleSimple() throws Exception {
-        firstOperand = new oparand(3.0);
-        secondOperand = new oparand(2.0);
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("1", decimalCalculator.subtract());
+        firstOperand = new DoubleOperand(3.0);
+        secondOperand = new DoubleOperand(2.0);
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("1", binaryCalculator.subtract());
     }
 
     @Test
     public void subtractDoubleSimpleException() throws Exception {
         try {
-            firstOperand = new oparand(-1.0);
-            secondOperand = new oparand(1.0);
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            firstOperand = new DoubleOperand(-1.0);
+            secondOperand = new DoubleOperand(1.0);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
 
         try {
-            decimalCalculator.subtract();
+            binaryCalculator.subtract();
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -446,26 +446,26 @@ public class DecimalCalculatorTest {
 
     @Test
     public void multiplyDoubleSimple() throws Exception {
-        firstOperand = new oparand(3.0);
-        secondOperand = new oparand(2.0);
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("6", decimalCalculator.multiply());
+        firstOperand = new DoubleOperand(3.0);
+        secondOperand = new DoubleOperand(2.0);
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("6", binaryCalculator.multiply());
     }
 
     @Test
     public void multiplyDoubleSimpleException() throws Exception {
         try {
-            firstOperand = new oparand(-1.0);
-            secondOperand = new oparand(1.0);
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            firstOperand = new DoubleOperand(-1.0);
+            secondOperand = new DoubleOperand(1.0);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
 
         try {
-            decimalCalculator.multiply();
+            binaryCalculator.multiply();
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -476,26 +476,26 @@ public class DecimalCalculatorTest {
 
     @Test
     public void divisionDoubleSimple() throws Exception {
-        firstOperand = new oparand(6.0);
-        secondOperand = new oparand(3.0);
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("2", decimalCalculator.division());
+        firstOperand = new DoubleOperand(6.0);
+        secondOperand = new DoubleOperand(3.0);
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("2", binaryCalculator.division());
     }
 
     @Test
     public void divisionDoubleSimpleException() throws Exception {
         try {
-            firstOperand = new oparand(-1.0);
-            secondOperand = new oparand(1.0);
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            firstOperand = new DoubleOperand(-1.0);
+            secondOperand = new DoubleOperand(1.0);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
 
         try {
-            decimalCalculator.division();
+            binaryCalculator.division();
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -506,12 +506,12 @@ public class DecimalCalculatorTest {
 
     @Test
     public void divideByZeroDoubleSimple() throws Exception {
-        firstOperand = new oparand(6.0);
-        secondOperand = new oparand(0.0);
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
+        firstOperand = new DoubleOperand(6.0);
+        secondOperand = new DoubleOperand(0.0);
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
         try {
-            decimalCalculator.division();
+            binaryCalculator.division();
             fail("The operation must raise an exception");
         } catch (Exception ex) {
             assertTrue(true);
@@ -521,16 +521,16 @@ public class DecimalCalculatorTest {
     @Test
     public void divideByZeroDoubleSimpleException() throws Exception {
         try {
-            firstOperand = new oparand(-1.0);
-            secondOperand = new oparand(0.0);
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            firstOperand = new DoubleOperand(-1.0);
+            secondOperand = new DoubleOperand(0.0);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
 
         try {
-            decimalCalculator.division();
+            binaryCalculator.division();
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -541,26 +541,26 @@ public class DecimalCalculatorTest {
 
     @Test
     public void powerDoubleSimple() throws Exception {
-        firstOperand = new oparand(3.0);
-        secondOperand = new oparand(2.0);
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("9", decimalCalculator.power());
+        firstOperand = new DoubleOperand(3.0);
+        secondOperand = new DoubleOperand(2.0);
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("9", binaryCalculator.power());
     }
 
     @Test
     public void powerDoubleSimpleException() throws Exception {
         try {
-            firstOperand = new oparand(-2.0);
-            secondOperand = new oparand(3.0);
-            decimalCalculator.setFirstOperand(firstOperand);
-            decimalCalculator.setSecondOperand(secondOperand);
+            firstOperand = new DoubleOperand(-2.0);
+            secondOperand = new DoubleOperand(3.0);
+            binaryCalculator.setFirstOperand(firstOperand);
+            binaryCalculator.setSecondOperand(secondOperand);
         } catch (Exception ex) {
             fail("Not expect exception here");
         }
 
         try {
-            decimalCalculator.power();
+            binaryCalculator.power();
             fail("Expect an exception to be thrown before here");
         } catch (RuntimeException ex) {
             assertTrue(true);
@@ -571,11 +571,11 @@ public class DecimalCalculatorTest {
 
     @Test
     public void divisionDoubleWithRemainder() throws Exception {
-        firstOperand = new oparand(5.0);
-        secondOperand = new oparand(3.0);
-        decimalCalculator.setFirstOperand(firstOperand);
-        decimalCalculator.setSecondOperand(secondOperand);
-        assertEquals("1.66667", decimalCalculator.division());
+        firstOperand = new DoubleOperand(5.0);
+        secondOperand = new DoubleOperand(3.0);
+        binaryCalculator.setFirstOperand(firstOperand);
+        binaryCalculator.setSecondOperand(secondOperand);
+        assertEquals("1.66667", binaryCalculator.division());
     }
 
     @Test
