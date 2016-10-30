@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class BaseCalculator {
     public IOperand firstOperand;
     public IOperand secondOperand;
-
+    public String ans;
     public BaseCalculator() {
     }
     public void setFirstOperand(IOperand operand) {
@@ -26,8 +26,8 @@ public class BaseCalculator {
         if(d1.compareTo(BigDecimal.ZERO) < 0 || d2.compareTo(BigDecimal.ZERO) < 0){
             throw  new  RuntimeException("operan < 1");
         }
-
-        return d1.add(d2).stripTrailingZeros().toString();
+        setAns(d1.add(d2).stripTrailingZeros().toString());
+        return getAns();
     }
 
     public String subtract() throws RuntimeException {
@@ -36,8 +36,8 @@ public class BaseCalculator {
         if(d1.compareTo(BigDecimal.ZERO) < 0 || d2.compareTo(BigDecimal.ZERO) < 0){
             throw  new  RuntimeException("operan < 1");
         }
-
-        return d1.subtract(d2).stripTrailingZeros().toString();
+        setAns(d1.subtract(d2).stripTrailingZeros().toString());
+        return getAns();
     }
 
     public String multiply() throws RuntimeException {
@@ -46,8 +46,8 @@ public class BaseCalculator {
         if(d1.compareTo(BigDecimal.ZERO) < 0 || d2.compareTo(BigDecimal.ZERO) < 0){
             throw  new  RuntimeException("operan < 1");
         }
-
-        return d1.multiply(d2).stripTrailingZeros().toString();
+        setAns(d1.multiply(d2).stripTrailingZeros().toString());
+        return getAns();
     }
 
     /* This method should throw an exception when divide by zero */
@@ -60,8 +60,8 @@ public class BaseCalculator {
         if(d2.compareTo(BigDecimal.ZERO) == 0){
             throw  new  ArithmeticException("operan < 1");
         }
-
-        return d1.divide(d2,5,BigDecimal.ROUND_HALF_UP).stripTrailingZeros().toString();
+        setAns( d1.divide(d2,5,BigDecimal.ROUND_HALF_UP).stripTrailingZeros().toString());
+        return getAns();
     }
 
     public String power() throws RuntimeException {
@@ -73,8 +73,15 @@ public class BaseCalculator {
 
         d1 = d1.pow(d2.intValue());
         d1 = d1.stripTrailingZeros();
-        return d1.toString();
+        setAns(d1.toString());
+        return getAns();
     }
 
+    public  String getAns()  throws RuntimeException {
+        return  ans;
+    }
+    public  void setAns(String ans)  throws RuntimeException {
+        this.ans = ans;
+    }
 
 }

@@ -10,7 +10,7 @@ import java.lang.reflect.Modifier;
 import static org.junit.Assert.*;
 
 
-public class BinaryCalculatorTest {
+public class DecimailCalculatorTest {
     IOperand firstOperand;
     IOperand secondOperand;
     cpe200.decimalCalculator decimalCalculator;
