@@ -1,6 +1,6 @@
 package cpe200;
 
-public class BinaryCalculator {
+public class BinaryCalculator extends BaseCalculator{
     private IOperand firstOperand;
     private IOperand secondOperand;
 
@@ -11,7 +11,7 @@ public class BinaryCalculator {
     public BinaryCalculator() {
 
     }
-
+@Override
     public void setFirstOperand(IOperand operand) {
         for(int i=0;i<operand.getOperand().length();i++){
             if(operand.getOperand().charAt(i)!='0'){
@@ -22,7 +22,7 @@ public class BinaryCalculator {
         }
         firstOperand= operand;
     }
-
+@Override
     public void setSecondOperand(IOperand operand) {
         for(int i=0;i<operand.getOperand().length();i++){
                 if(operand.getOperand().charAt(i) !='0'){
@@ -33,7 +33,7 @@ public class BinaryCalculator {
             }
         secondOperand= operand;
     }
-
+@Override
     public String add() throws RuntimeException {
         int first;
         int second;
@@ -43,7 +43,7 @@ public class BinaryCalculator {
         out = first+second;
         return Integer.toBinaryString(out);
     }
-
+@Override
     public String subtract() throws RuntimeException {
         int first;
         int second;
@@ -54,7 +54,7 @@ public class BinaryCalculator {
         return Integer.toBinaryString(out);
     }
 
-    public String multiply() throws RuntimeException {
+ @Override   public String multiply() throws RuntimeException {
         int first;
         int second;
         int out;
@@ -65,6 +65,7 @@ public class BinaryCalculator {
     }
 
     /* This method should throw an exception when divide by zero */
+    @Override
     public String division() throws RuntimeException {
         int first;
         int second;
@@ -74,7 +75,7 @@ public class BinaryCalculator {
         out = first/second;
         return Integer.toBinaryString(out);
     }
-
+@Override
     public String power() throws RuntimeException {
         int first;
         int second;
