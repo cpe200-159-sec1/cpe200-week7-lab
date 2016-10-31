@@ -5,14 +5,16 @@ package cpe200;
  */
 public class IntegerOperand implements IOperand {
 
-    private String operand;                             //check
-
+    private String operand;
     public IntegerOperand(int i) {
-        operand = Integer.toString(i);
+        this.operand = Integer.toString(i);
     }
 
     @Override
     public String getOperand() {
         return operand;
     }
+
+    int[][] s = new int[20][20];
+
 }
