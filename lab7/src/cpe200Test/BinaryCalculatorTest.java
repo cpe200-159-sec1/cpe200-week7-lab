@@ -3,18 +3,17 @@ package cpe200Test;
 import cpe200.*;
 import org.junit.Before;
 import org.junit.Test;
-import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 
 import static org.junit.Assert.*;
 
-public class BinaryCalculatorTest {
+public class DecimalCalculatorTest {
     IOperand firstOperand;
     IOperand secondOperand;
-    BinaryCalculator binaryCalculator;
+    DecimalCalculator binaryCalculator;
 
     @Before
     public void setUp() throws Exception {
-        binaryCalculator = new BinaryCalculator();
+        binaryCalculator = new DecimalCalculator();
     }
 
     @Test
