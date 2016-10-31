@@ -6,14 +6,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class DecimalCalculatorTest {
+public class BinaryCalculatorTest {
     IOperand firstOperand;
     IOperand secondOperand;
-    DecimalCalculator binaryCalculator;
+    BinaryCalculator binaryCalculator;
 
     @Before
     public void setUp() throws Exception {
-        binaryCalculator = new DecimalCalculator();
+        binaryCalculator = new BinaryCalculator();
     }
 
     @Test

@@ -2,20 +2,28 @@ package cpe200;
 
 import java.math.BigDecimal;
 
-public class DecimalCalculator {
+public class BinaryCalculator{
     private IOperand firstOperand;
     private IOperand secondOperand;
 
-    public DecimalCalculator() {
+    public BinaryCalculator() {
 
     }
 
     public void setFirstOperand(IOperand operand) {
-        firstOperand = operand;
+        if(operand.getOperand().matches("[01+]")){
+            firstOperand = new IntegerOperand(Integer.parseInt(operand.getOperand(),2));
+        }else{
+            throw new RuntimeException("The input isn't binary format.");
+        }
     }
 
     public void setSecondOperand(IOperand operand) {
-        secondOperand = operand;
+        if(operand.getOperand().matches("[01+]")){
+            secondOperand = new IntegerOperand(Integer.parseInt(operand.getOperand(),2));
+        }else{
+            throw new RuntimeException("The input isn't binary format.");
+        }
     }
 
     public String add() throws RuntimeException {
