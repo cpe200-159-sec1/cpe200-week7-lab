@@ -1,37 +1,26 @@
 package cpe200;
 
-public class BinaryCalculator {
-    public IOperand firstOperand;
-    public IOperand secondOperand;
+import java.math.BigDecimal;
 
-    public BinaryCalculator() {
-    }
+public class BinaryCalculator extends BaseCalculator {
+
 
     public void setFirstOperand(IOperand operand) {
+        if(operand.getOperand().matches("^[01+]")){
+            super.firstOperand = new IntegerOperand(Integer.parseInt(operand.getOperand(),2));
+        }else{
+            throw new ArithmeticException("The input isn't binary format.");
+        }
     }
 
     public void setSecondOperand(IOperand operand) {
+        if(operand.getOperand().matches("^[01+]")){
+            super.secondOperand = new IntegerOperand(Integer.parseInt(operand.getOperand(),2));
+        }else{
+            throw new ArithmeticException("The input isn't binary format.");
+        }
     }
 
-    public String add() throws RuntimeException {
-        return null;
-    }
 
-    public String subtract() throws RuntimeException {
-        return null;
-    }
-
-    public String multiply() throws RuntimeException {
-        return null;
-    }
-
-    /* This method should throw an exception when divide by zero */
-    public String division() throws RuntimeException {
-        return null;
-    }
-
-    public String power() throws RuntimeException {
-        return null;
-    }
 
 }
