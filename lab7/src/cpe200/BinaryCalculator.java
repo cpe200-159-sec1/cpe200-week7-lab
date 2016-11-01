@@ -18,6 +18,7 @@ public class BinaryCalculator {
 
     private int xpointLength = 0;
     private int ypointLength = 0;
+    private int bPoint = 0;
 
     public BinaryCalculator() {
         x = "0";
@@ -94,8 +95,10 @@ public class BinaryCalculator {
 
     /* This method should throw an exception when divide by zero*/
     public String division() throws RuntimeException {
-        inDivision(x ,y);
-        return "";
+        if(reFormmating(rePointting(this.x)).intValue() < 0 || reFormmating(rePointting(this.y)).intValue() < 0){
+            throw new RuntimeException("Operand must not negative");
+        }return inDivision(x ,y);
+
     }
 
     public String power() throws RuntimeException {
@@ -140,10 +143,16 @@ public class BinaryCalculator {
                 now = Integer.toBinaryString(Integer.parseInt(inAdder(chk.get(0), chk.get(1))));
                 System.out.println("\tNow: "+now);
             }
-            return Integer.toString(Integer.parseInt(now,2));
+            return reFormmating(rePointting(now)).stripTrailingZeros().toString();
         }
+    }
 
-
+    private String chkBalance(String a, String b, int sel){
+        a = String.format("%0"+b.length()+"d", Integer.parseInt(a));
+        b = String.format("%0"+a.length()+"d", Integer.parseInt(b));
+        System.out.println("Check Balance with selector");
+        System.out.println("\t\tX is: "+this.x+" Y is: "+this.y);
+        return (sel == 1)?a:b;
     }
 
     private String inAdder(String x, String y){
@@ -180,7 +189,8 @@ public class BinaryCalculator {
 
     private String inSubtract(String a, String b){
         System.out.println("---------Subst MODULE-------");
-        chkBalance();
+        a = chkBalance(a, b, 1);
+        b = chkBalance(a, b, 2);
         String subr = new String();
         String borr =  new String("0");
         for (int i=a.length()-1;i>=0; i--){
@@ -211,95 +221,121 @@ public class BinaryCalculator {
     }
 
     private String inDivision(String a, String b){
+        //String a = Integer.toBinaryString(Integer.parseInt("10"));
+        //String b = Integer.toBinaryString(Integer.parseInt("3"));
         System.out.println("---------Division MODULE-------");
-        int aLength = a.length();
+        int a_oldLength = a.length();
         int bLength = b.length();
         int step = bLength;
-        int c=0;int i=0;
+        int fillzero = 0;
 
-        int tryDigit = 5;
-        boolean isFin = false;
+        String divided = a;
+        int c=1;int i=0;
+
+        int tryDigit = 30;
+        boolean tried = false;
+        boolean toggle = true;
 
         StringBuilder result = new StringBuilder();
         StringBuilder stack = new StringBuilder("");
+        StringBuilder reminder = new StringBuilder("");
         String next = "";
-        String cha = "";
-        while (true){
+        String temp = "";
+
+        ArrayList<String> remHistory = new ArrayList<String>();
+
+        boolean req = false;
+
+
+        while (divided.length() >= 0){
             System.out.println("--------- Long Division -------");
-            try {
-                cha = a.subSequence(c, i+1).toString();
-                System.out.println("Try SubSequennce");
-            }catch (IndexOutOfBoundsException e){
-                if(tryDigit > 0){
-                    a += "0";
-                }else {
+            if ((divided.length() <= b.length()+1) && tryDigit >=0){
+                divided += "0";
+                if (tryDigit <= 0){
                     break;
                 }
-            }
-            System.out.println("String CHA : "+cha+" [i: "+i+" c: "+c+" ]+s "+stack.toString().length());
+                tryDigit--;
+            }else {
+                //Stack porcess
+                temp = divided.subSequence(0, c).toString();
+                next = divided.subSequence(c,c+1).toString();
+                stack.append(temp);
 
-            boolean nowIsMoreThan = isMoreThan( cha , b );
+                if(reminder.length() > 0){
+                    //Has reminder
+                    if(isMoreThan(reminder.toString(), b)){
+                        //Reminder can divided by B
+                        result.append("1");
+                        String t = reminder.toString();
+                        reminder.delete(0, reminder.length());
+                        reminder.append(intTobinString(inSubtract(t, b)));
+                        remHistory.add(reminder.toString());
+                        /*if(remHistory.size() > 0){
+                            if(reminder.toString().equals(remHistory.get(remHistory.size()-1).toString())){
+                                //Is in lastest history
+                                StringBuilder g = new StringBuilder(result.toString().subSequence(
+                                        result.length()-(reminder.toString().length()-1), result.length()
+                                )).reverse();
+                                result.append(
+                                        g
+                                );
+                                break;
+                            }
 
-
-            if(nowIsMoreThan && stack.toString().length() <= 0){
-                System.out.println("Yes char A in b");
-                result.append("1");
-                stack.append(intTobinString(inSubtract(cha, b)));
-
-            }
-
-            else if(nowIsMoreThan){
-                if(isMoreThan(stack.toString(), b)){
-                    result.append("1");
-                    String temp = intTobinString(inSubtract(stack.toString(), b));
-                    stack.delete(0, stack.length());
-                    stack.append(temp);
-                    c=i;
-                    i++;
-                }else{
-                    result.append("0");
-                    try {
-                        next = a.subSequence(i,i+1).toString();
-                        if(isMoreThan(stack.append(next).toString(), b)){
-                            String temp = intTobinString(inSubtract(stack.toString(), b));
-                            stack.delete(0, stack.length());
-                            stack.append(temp);
-                            c=i;
-                            i++;
-                        }
-                    }catch (IndexOutOfBoundsException e){
-                        if(tryDigit > 0){
-                            a += "0";
-                            i++;
-                        }else {
+                        }*/
+                        if(reFormmating(reminder.toString()).intValue() <= 0 || tryDigit <= 0){
                             break;
                         }
+                    }else {
+                        //Reminder can't divided by B
+
+                        //Add stack in reminder
+                        reminder.append(stack.toString());
+
+                        //Pattern of division
+                        String testRem = reminder.toString()+next;
+                        if (testRem.length() <= b.length()){
+                            if(isMoreThan(testRem, b)){
+                                result.append("");
+                            }
+
+                        }
+
+
+
+                        c=1;
                     }
+
+                    //Stack clear in has reminder
+                    stack.delete(0,stack.length());
+                    divided = divided.substring(c, divided.length());
+
+                }else {
+                    //has'nt reminder
+
+                    if(isMoreThan(stack.toString(), b)){
+                        //Stack can devided by b
+                        result.append("1");
+
+                        //Subtract a with b return reminder
+                        reminder.append(intTobinString(inSubtract(stack.toString(), b)));
+                        divided = divided.substring(c, divided.length());
+                        c=1;
+                    }else {
+                        result.append("0");
+                        c++;
+                    }
+                    stack.delete(0,stack.length());
                 }
 
-
-
-                System.out.println("Next: "+next);
-                System.out.println("Stack: "+stack);
-
-                if(isMoreThan(cha+next, b)){
-                    System.out.println(cha+next+" Divided by "+b);
-                }
-
-                tryDigit--;
-
-                if (isFin && tryDigit <= 0){
-                    break;
-                }
             }
-            else {
-                result.append("0");
-                i++;
-            }
+
+
         }
         System.out.println(reFormmating(result.toString()));
         System.out.println(result.toString());
-        return "";
+        int dg  = result.toString().length() - a.length();
+        return reFormmating(rePointting(result.toString(), dg)).setScale(5, BigDecimal.ROUND_UP).stripTrailingZeros().toString();
     }
     private boolean isMoreThan(String a, String b){
         //a is array of Number ex 11/aaa and b is divisor ex bb/111 (in long divisor format)
@@ -390,10 +426,28 @@ public class BinaryCalculator {
             return n;
         }
     }
+    private String rePointting(String numbr, int digit){
+        if(digit > 0){
+            String sNum = numbr.substring(0, numbr.length()-digit);
+            String sPoint = numbr.substring(numbr.length()-digit, numbr.length());
+            String n = Integer.toString(Integer.parseInt(sNum,2));
+            String p = Integer.toString(Integer.parseInt(sPoint,2));
+            //Result of p.n is Double
+            System.out.println("\t\tRepoint : "+n+"."+p);
+            //return to Decimal with float
+            return n+"."+p;
+        }else {
+            System.out.println("\t\t\tIn rePoint not rePoint : "+numbr);
+            String n = Integer.toString(Integer.parseInt(numbr,2));
+            System.out.println("\t\tNot repoint : "+n);
+            //Return to decimal
+            return n;
+        }
+    }
 
     private BigDecimal reFormmating(String result){
-        System.out.println("\t\tReformmat input : "+result);
         BigDecimal res = new BigDecimal(result);
+        System.out.println("\t\tReformmat input : "+result+" as "+res);
         return res;
     }
 
