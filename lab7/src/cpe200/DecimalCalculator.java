@@ -11,11 +11,11 @@ public class DecimalCalculator {
         secondOperand = new BigDecimal(0);
     }
 
-    public void setFirstOperand(Bigdecimal operand) {
+    public void setFirstOperand(IOperand operand) {
         this.firstOperand = new BigDecimal(operand.getOperand());
     }
 
-    public void setSecondOperand(Bigdecimal operand) {
+    public void setSecondOperand(IOperand operand) {
         this.secondOperand = new BigDecimal(operand.getOperand());
     }
 
