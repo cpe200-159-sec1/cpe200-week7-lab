@@ -1,36 +1,16 @@
 package cpe200;
 
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class BinaryCalculator extends BaseCalculator{
-    private IOperand firstOperand;
-    private IOperand secondOperand;
+public class BaseCalculator {
+    protected IOperand firstOperand;
+    protected IOperand secondOperand;
 
-    public BinaryCalculator() {
+    public BaseCalculator() {
     }
-
-    public void setFirstOperand(IOperand operand)
-    {
-        if(operand.getOperand().matches("[01]+"))
-            firstOperand = new StringOperand(Integer.toString(Integer.parseInt(operand.getOperand(),2))) ;
-
-
-        else
-            throw new ArithmeticException("Operand is not binary");
-    }
-
-
-    public void setSecondOperand(IOperand operand)
-    {
-        if(operand.getOperand().matches("[01]+"))
-            secondOperand = new StringOperand(Integer.toString(Integer.parseInt(operand.getOperand(),2))) ;
-        else
-            throw new ArithmeticException("Operand is not binary");
-
-    }
-
-    /*public String add()
+    public String add()
     {
         BigDecimal temp1 = new BigDecimal(firstOperand.getOperand());
         BigDecimal temp2 = new BigDecimal(secondOperand.getOperand());
@@ -59,7 +39,7 @@ public class BinaryCalculator extends BaseCalculator{
         return temp1.multiply(temp2).stripTrailingZeros().toString();
     }
 
-    /* This method should throw an exception when divide by zero
+    /* This method should throw an exception when divide by zero */
     public String division()
     {
         BigDecimal temp1 = new BigDecimal(firstOperand.getOperand());
@@ -79,5 +59,4 @@ public class BinaryCalculator extends BaseCalculator{
         temp1 = temp1.pow(temp2.intValue()).stripTrailingZeros();
         return temp1.toString();
     }
-*/
 }

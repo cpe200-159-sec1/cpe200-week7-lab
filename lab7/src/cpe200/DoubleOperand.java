@@ -16,4 +16,6 @@ public class DoubleOperand implements IOperand{
     public String getOperand() {
         return operand;
     }
+
+
 }

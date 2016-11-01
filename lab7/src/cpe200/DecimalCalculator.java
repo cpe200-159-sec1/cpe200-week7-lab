@@ -2,9 +2,7 @@ package cpe200;
 
 import java.math.BigDecimal;
 
-public class DecimalCalculator {
-    private IOperand firstOperand;
-    private IOperand secondOperand;
+public class DecimalCalculator extends BaseCalculator {
     private BigDecimal FOP;
     private BigDecimal SOP;
 
@@ -12,16 +10,16 @@ public class DecimalCalculator {
     }
 
     public void setFirstOperand(IOperand operand) {
-        firstOperand = operand;
+        super.firstOperand = operand;
         FOP = new BigDecimal(firstOperand.getOperand());
     }
 
     public void setSecondOperand(IOperand operand) {
-        secondOperand = operand;
+        super.secondOperand = operand;
         SOP = new BigDecimal(secondOperand.getOperand());
     }
 
-    public String add() throws RuntimeException {
+   /* public String add() throws RuntimeException {
         if(FOP.intValue() < 0 || SOP.intValue() < 0){
             throw new RuntimeException("Operand is negative");
         }
@@ -42,7 +40,7 @@ public class DecimalCalculator {
         return FOP.multiply(SOP).stripTrailingZeros().toString();
     }
 
-    /* This method should throw an exception when divide by zero */
+    /* This method should throw an exception when divide by zero
     public String division() throws RuntimeException {
         if(SOP.equals(0)) {
             throw new ArithmeticException("ERROR");
@@ -58,7 +56,7 @@ public class DecimalCalculator {
             throw new RuntimeException("Operand is negative");
         }
         return FOP.pow(SOP.intValue()).stripTrailingZeros().toString();
-    }
+    }*/
 
 
 }
