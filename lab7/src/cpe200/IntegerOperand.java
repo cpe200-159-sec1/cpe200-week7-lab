@@ -15,6 +15,4 @@ public class IntegerOperand implements IOperand {
         return operand;
     }
 
-    int[][] s = new int[20][20];
-
 }
