@@ -7,7 +7,7 @@ public class DoubleOperand implements IOperand{
     private String operand;
 
     public DoubleOperand(Double d) {
-        operand = d.toString();
+        operand = Double.toString(d);
     }
 
     @Override
