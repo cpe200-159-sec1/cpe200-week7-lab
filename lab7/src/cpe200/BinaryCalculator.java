@@ -3,7 +3,7 @@ package cpe200;
 /**
  * Created by Nickky on 9/11/2559.
  */
-public class BinaryCalculator {
+public class BinaryCalculator extends BaseCalculator {
     public IOperand firstOperand;
     public IOperand secondOperand;
 
