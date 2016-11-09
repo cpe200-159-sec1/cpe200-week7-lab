@@ -10,14 +10,14 @@ import java.lang.reflect.Modifier;
 import static org.junit.Assert.*;
 
 
-public class BinaryCalculatorTest {
+public class DecimalCalculatorTest {
     IOperand firstOperand;
     IOperand secondOperand;
-    BinaryCalculator binaryCalculator;
+    DecimalCalculator binaryCalculator;
 
     @Before
     public void setUp() throws Exception {
-        binaryCalculator = new BinaryCalculator();
+        DecimalCalculator = new BinaryCalculator();
     }
 
     @Test

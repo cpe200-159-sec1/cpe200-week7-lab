@@ -1,10 +1,10 @@
 package cpe200;
 
-public class BinaryCalculator {
+public class DecimalCalculator {
     public IOperand firstOperand;
     public IOperand secondOperand;
 
-    public BinaryCalculator() {
+    public DecimalCalculator() {
     }
 
     public void setFirstOperand(IOperand operand) {
