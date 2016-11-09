@@ -17,7 +17,7 @@ public class DecimalCalculatorTest {
 
     @Before
     public void setUp() throws Exception {
-        DecimalCalculator = new BinaryCalculator();
+        binaryCalculator = new DecimalCalculator();
     }
 
     @Test
@@ -583,10 +583,10 @@ public class DecimalCalculatorTest {
         Field field = StringOperand.class.getDeclaredField("operand");
         assertFalse(Modifier.isPublic(field.getModifiers()));
 
-        field = BinaryCalculator.class.getDeclaredField("firstOperand");
+        field = DecimalCalculator.class.getDeclaredField("firstOperand");
         assertFalse(Modifier.isPublic(field.getModifiers()));
 
-        field = BinaryCalculator.class.getDeclaredField("secondOperand");
+        field = DecimalCalculator.class.getDeclaredField("secondOperand");
         assertFalse(Modifier.isPublic(field.getModifiers()));
     }
 
