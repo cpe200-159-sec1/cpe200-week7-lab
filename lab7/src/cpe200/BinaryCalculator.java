@@ -1,7 +1,5 @@
 package cpe200;
 
-import com.sun.deploy.util.StringUtils;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -263,6 +261,7 @@ public class BinaryCalculator {
 
                 if(reminder.length() > 0){
                     //Has reminder
+
                     if(isMoreThan(reminder.toString(), b)){
                         //Reminder can divided by B
                         result.append("1");
