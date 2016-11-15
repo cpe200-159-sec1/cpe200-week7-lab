@@ -3,7 +3,7 @@ package cpe200;
 /**
  * Created by 123 on 31/10/2559.
  */
-public class BinaryCalculator {
+public class BinaryCalculator extends BaseCalculator {
     private IOperand firstOperand;
     private IOperand secondOperand;
 
@@ -15,6 +15,7 @@ public class BinaryCalculator {
         return Integer.parseInt(operand,2);
     }
 
+    @Override
     public void setFirstOperand(IOperand operand){
         for (int i=0;i<operand.getOperand().length();i++){
             if (operand.getOperand().charAt(i) != '0'){
@@ -26,6 +27,7 @@ public class BinaryCalculator {
         firstOperand = operand;
     }
 
+    @Override
     public void setSecondOperand(IOperand operand){
         for (int i=0;i<operand.getOperand().length();i++){
             if (operand.getOperand().charAt(i) != '0'){
@@ -37,6 +39,7 @@ public class BinaryCalculator {
         secondOperand = operand;
     }
 
+    @Override
     public String add() throws  RuntimeException{
         int first,second;
         first = binaryToint(firstOperand.getOperand());
@@ -44,6 +47,7 @@ public class BinaryCalculator {
         return Integer.toBinaryString(first+second);
     }
 
+    @Override
     public String subtract() throws  RuntimeException{
         int first,second;
         first = binaryToint(firstOperand.getOperand());
@@ -51,6 +55,7 @@ public class BinaryCalculator {
         return Integer.toBinaryString(first-second);
     }
 
+    @Override
     public String multiply() throws RuntimeException {
         int first,second;
         first = binaryToint(firstOperand.getOperand());
@@ -58,6 +63,7 @@ public class BinaryCalculator {
         return Integer.toBinaryString(first*second);
     }
 
+    @Override
     public String division() throws RuntimeException{
         int first,second;
         first = binaryToint(firstOperand.getOperand());
@@ -68,6 +74,7 @@ public class BinaryCalculator {
         return Integer.toBinaryString(first/second);
     }
 
+    @Override
     public String power() throws RuntimeException{
         int first,second;
         first = binaryToint(firstOperand.getOperand());
