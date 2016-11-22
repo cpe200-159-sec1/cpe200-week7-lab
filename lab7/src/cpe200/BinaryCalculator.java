@@ -1,5 +1,7 @@
 package cpe200;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Nickky on 9/11/2559.
  */
@@ -7,13 +9,9 @@ public class BinaryCalculator extends BaseCalculator {
     public IOperand firstOperand;
     public IOperand secondOperand;
 
-    int x;
-    int y;
 
-    public BinaryCalculator() {
-    }
-    private int binaryToInt(String operand){
-        return Integer.parseInt(operand,2);
+    private BigDecimal binaryToInt(String operand){
+        return new  BigDecimal(Integer.parseInt(operand,2));
     }
 
     public void setFirstOperand(IOperand operand) {
@@ -24,7 +22,7 @@ public class BinaryCalculator extends BaseCalculator {
                 }
             }
         }
-        x = binaryToInt(operand.getOperand());
+        super.setx(binaryToInt(operand.getOperand()));
         firstOperand = operand;
 
 
@@ -38,28 +36,28 @@ public class BinaryCalculator extends BaseCalculator {
                 }
             }
         }
-        y = binaryToInt(operand.getOperand());
+        super.sety(binaryToInt(operand.getOperand()));
         secondOperand = operand;
     }
 
     public String add() throws RuntimeException {
-        return Integer.toBinaryString(x + y);
+        return Integer.toBinaryString(Integer.parseInt(super.add()));
     }
 
     public String subtract() throws RuntimeException {
-        return Integer.toBinaryString(x - y);
+        return Integer.toBinaryString(Integer.parseInt(super.subtract()));
     }
 
     public String multiply() throws RuntimeException {
-        return Integer.toBinaryString(x * y);
+        return Integer.toBinaryString(Integer.parseInt(super.multiply()));
     }
 
     /* This method should throw an exception when divide by zero */
     public String division() throws RuntimeException {
-        return Integer.toBinaryString(x / y);
+        return Integer.toBinaryString(Integer.parseInt(super.division()));
     }
 
     public String power() throws RuntimeException {
-        return Integer.toBinaryString((int)Math.pow((double) x, (double) y));
+        return Integer.toBinaryString(Integer.parseInt(super.power()));
     }
 }
