@@ -10,7 +10,7 @@ import java.lang.reflect.Modifier;
 import static org.junit.Assert.*;
 
 
-public class DecimalCalculatorTest {
+public class BinaryCalculatorTest {
     IOperand firstOperand;
     IOperand secondOperand;
     DecimalCalculator decimalCalculator;
@@ -583,10 +583,10 @@ public class DecimalCalculatorTest {
         Field field = StringOperand.class.getDeclaredField("operand");
         assertFalse(Modifier.isPublic(field.getModifiers()));
 
-        field = DecimalCalculator.class.getDeclaredField("firstOperand");
+        field = BaseCalculator.class.getDeclaredField("firstOperand");
         assertFalse(Modifier.isPublic(field.getModifiers()));
 
-        field = DecimalCalculator.class.getDeclaredField("secondOperand");
+        field = BaseCalculator.class.getDeclaredField("secondOperand");
         assertFalse(Modifier.isPublic(field.getModifiers()));
     }
 

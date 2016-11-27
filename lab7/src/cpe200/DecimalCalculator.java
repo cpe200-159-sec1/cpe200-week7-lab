@@ -1,37 +1,20 @@
 package cpe200;
+import java.math.BigDecimal;
 
-public class DecimalCalculator {
-    public IOperand firstOperand;
-    public IOperand secondOperand;
-
-    public DecimalCalculator() {
+public class DecimalCalculator extends BaseCalculator {
+    public DecimalCalculator()
+    {
+        firstOperand = new BigDecimal(0);
+        secondOperand = new BigDecimal(0);
     }
 
     public void setFirstOperand(IOperand operand) {
+        firstOperand = new BigDecimal(operand.getOperand());
     }
 
     public void setSecondOperand(IOperand operand) {
+        secondOperand = new BigDecimal(operand.getOperand());
     }
 
-    public String add() throws RuntimeException {
-        return null;
-    }
-
-    public String subtract() throws RuntimeException {
-        return null;
-    }
-
-    public String multiply() throws RuntimeException {
-        return null;
-    }
-
-    /* This method should throw an exception when divide by zero */
-    public String division() throws RuntimeException {
-        return null;
-    }
-
-    public String power() throws RuntimeException {
-        return null;
-    }
 
 }
