@@ -32,6 +32,7 @@ public class BinaryCalculator {
 
     public String power() throws RuntimeException {
         return null;
+        //
     }
 
 }
