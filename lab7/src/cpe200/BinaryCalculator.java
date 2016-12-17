@@ -1,9 +1,5 @@
 package cpe200;
 
-
-
-
-
  import java.math.BigDecimal;
  import static java.lang.Math.pow;
 
